@@ -5,18 +5,11 @@ import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.AdapterView
-import android.widget.ListView
+import android.view.View
+import android.widget.FrameLayout
+import com.google.android.material.navigation.NavigationBarView
 import com.google.gson.Gson
-import nav_com.ru.sevstoryaudio.adapters.AllTripsAdapter
-import nav_com.ru.sevstoryaudio.connection.Get
-import nav_com.ru.sevstoryaudio.models.AllTripsModel
-import nav_com.ru.sevstoryaudio.models.ResponseAllTripsModel
 import nav_com.ru.sevstoryaudio.models.SavedRoutesModel
-import okhttp3.Call
-import okhttp3.Callback
-import okhttp3.Response
-import java.io.IOException
 
 class MainActivity : AppCompatActivity() {
 
@@ -42,56 +35,35 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        loadList()
+        val bnView = findViewById<NavigationBarView>(R.id.bottom_navigation)
+
+        bnView.selectedItemId = R.id.page_1
+
+        bnView.setOnItemSelectedListener { item ->
+            when(item.itemId) {
+                R.id.page_1 -> {
+                    tourSelected()
+                    true
+                }
+                R.id.page_2 -> {
+                    profileSelected()
+                    true
+                }
+                else -> false
+            }
+        }
     }
 
-    private fun loadList() {
-        val listView = findViewById<ListView>(R.id.list_view)
+    private fun tourSelected() {
+        val tourContent = findViewById<FrameLayout>(R.id.tour_fragment)
 
-        val url = "https://sevstory.nav-com.ru/app/api?q=getAllTrips"
+        tourContent.visibility = View.VISIBLE
+    }
 
-        val getResponse = Get()
+    private fun profileSelected() {
+        val tourContent = findViewById<FrameLayout>(R.id.tour_fragment)
 
-        getResponse.run(
-            url,
-            object : Callback {
-                override fun onFailure(call: Call, e: IOException) {
-                    runOnUiThread {
-
-                    }
-                }
-
-                @Throws(IOException::class)
-                override fun onResponse(call: Call, response: Response) {
-                    val stringResponse = response.body.string()
-                    val gson = Gson()
-
-                    val responseAllTripsModel: ResponseAllTripsModel =
-                        gson.fromJson(stringResponse, ResponseAllTripsModel::class.java)
-
-                    if (responseAllTripsModel.code == 200) {
-                        val tripsList: List<AllTripsModel> =
-                            responseAllTripsModel.responseBody
-
-                        val allTripsAdapter = AllTripsAdapter(
-                            this@MainActivity,
-                            R.layout.trip_item,
-                            tripsList
-                        )
-
-                        runOnUiThread {
-                            listView.adapter = allTripsAdapter
-                            listView.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
-                                val intent = Intent(this@MainActivity, PreviewTripActivity::class.java)
-                                intent.putExtra("tripId", tripsList[position].tripId.toString())
-                                startActivity(intent)
-                                finish()
-                            }
-                        }
-                    }
-                }
-            })
-
+        tourContent.visibility = View.GONE
     }
 
     private fun getSavedRouts() = sharedPrefs.getString(KEY_ROUTS, "")

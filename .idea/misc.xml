@@ -8,6 +8,7 @@
         <entry key="..\:/Users/admin/AndroidStudioProjects/SevStoryaudio/app/src/main/res/drawable/ic_back_circle.xml" value="0.102" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/SevStoryaudio/app/src/main/res/drawable/ic_check.xml" value="0.127" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/SevStoryaudio/app/src/main/res/drawable/ic_clock.xml" value="0.102" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/SevStoryaudio/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.174" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/SevStoryaudio/app/src/main/res/drawable/ic_geopoint.xml" value="0.102" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/SevStoryaudio/app/src/main/res/drawable/ic_location.xml" value="0.102" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/SevStoryaudio/app/src/main/res/drawable/ic_tick.xml" value="0.174" />
@@ -20,7 +21,9 @@
         <entry key="..\:/Users/admin/AndroidStudioProjects/SevStoryaudio/app/src/main/res/layout/activity_preview_trip.xml" value="0.28306159420289856" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/SevStoryaudio/app/src/main/res/layout/activity_sight.xml" value="0.28306159420289856" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/SevStoryaudio/app/src/main/res/layout/activity_start_trip.xml" value="0.28306159420289856" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/SevStoryaudio/app/src/main/res/layout/fragment_tour_list.xml" value="0.22056159420289856" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/SevStoryaudio/app/src/main/res/layout/trip_item.xml" value="0.28306159420289856" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/SevStoryaudio/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.36666666666666664" />
       </map>
     </option>
   </component>

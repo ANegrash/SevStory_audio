@@ -54,16 +54,16 @@ class AllTripsAdapter (
         var result = ""
         val hours = minutes / 60
         if (hours != 0) {
-            result += hours
+            result +=  " $hours "
             result += when (hours) {
                 1 -> {
-                    " час"
+                    "час"
                 }
                 2, 3, 4 -> {
-                    " часа"
+                    "часа"
                 }
                 else -> {
-                    " часов"
+                    "часов"
                 }
             }
         }
