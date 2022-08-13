@@ -3,11 +3,11 @@
     <item
         android:id="@+id/page_1"
         android:enabled="true"
-        android:icon="@drawable/ic_clock"
-        android:title="Зщште 1"/>
+        android:icon="@drawable/ic_landmark"
+        android:title="@string/tour_title"/>
     <item
         android:id="@+id/page_2"
         android:enabled="true"
-        android:icon="@drawable/ic_location"
-        android:title="Text 2"/>
+        android:icon="@drawable/ic_user_large_solid"
+        android:title="@string/profile_title"/>
 </menu>

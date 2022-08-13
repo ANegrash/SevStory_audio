@@ -2,7 +2,6 @@ package nav_com.ru.sevstoryaudio
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,7 +26,6 @@ class TourListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-
         val url = "https://sevstory.nav-com.ru/app/api?q=getAllTrips"
 
         val getResponse = Get()
@@ -43,7 +41,6 @@ class TourListFragment : Fragment() {
                 override fun onResponse(call: Call, response: Response) {
                     val stringResponse = response.body.string()
                     val gson = Gson()
-
 
                     val responseAllTripsModel: ResponseAllTripsModel =
                         gson.fromJson(stringResponse, ResponseAllTripsModel::class.java)
