@@ -3,15 +3,13 @@ package nav_com.ru.sevstoryaudio
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.View
-import android.widget.FrameLayout
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.google.android.material.navigation.NavigationBarView
 import com.google.gson.Gson
 import nav_com.ru.sevstoryaudio.connection.Get
-import nav_com.ru.sevstoryaudio.models.ResponseAllTripsModel
 import nav_com.ru.sevstoryaudio.models.ResponseGetTokenModel
 import nav_com.ru.sevstoryaudio.models.SavedRoutesModel
 import okhttp3.Call
@@ -89,32 +87,29 @@ class MainActivity : AppCompatActivity() {
 
         bnView.selectedItemId = R.id.page_1
 
+        val tourListFragment: Fragment = TourListFragment()
+        val profileFragment: Fragment = ProfileFragment()
+        val fragmentManager: FragmentManager = supportFragmentManager
+        var active: Fragment = tourListFragment
+
+        fragmentManager.beginTransaction().add(R.id.main_container, profileFragment, "2").hide(profileFragment).commit()
+        fragmentManager.beginTransaction().add(R.id.main_container, tourListFragment, "1").commit()
+
         bnView.setOnItemSelectedListener { item ->
-            when(item.itemId) {
+            when (item.itemId) {
                 R.id.page_1 -> {
-                    tourSelected()
+                    fragmentManager.beginTransaction().hide(active).show(tourListFragment).commit()
+                    active = tourListFragment
                     true
                 }
                 R.id.page_2 -> {
-                    profileSelected()
+                    fragmentManager.beginTransaction().hide(active).show(profileFragment).commit()
+                    active = profileFragment
                     true
                 }
                 else -> false
             }
         }
-        Log.e("TAG", "" + getToken())
-    }
-
-    private fun tourSelected() {
-        val tourContent = findViewById<FrameLayout>(R.id.tour_fragment)
-
-        tourContent.visibility = View.VISIBLE
-    }
-
-    private fun profileSelected() {
-        val tourContent = findViewById<FrameLayout>(R.id.tour_fragment)
-
-        tourContent.visibility = View.GONE
     }
 
     private fun getSavedRouts() = sharedPrefs.getString(KEY_ROUTS, "")
