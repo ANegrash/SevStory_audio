@@ -1,5 +1,6 @@
 package nav_com.ru.sevstoryaudio
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
@@ -13,10 +14,7 @@ import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import nav_com.ru.sevstoryaudio.adapters.AllTripsAdapter
 import nav_com.ru.sevstoryaudio.connection.Get
-import nav_com.ru.sevstoryaudio.models.AllTripsModel
-import nav_com.ru.sevstoryaudio.models.ResponseAllTripsModel
-import nav_com.ru.sevstoryaudio.models.ResponseTripPreviewModel
-import nav_com.ru.sevstoryaudio.models.TripPreviewModel
+import nav_com.ru.sevstoryaudio.models.*
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response
@@ -24,6 +22,10 @@ import java.io.IOException
 import java.lang.Integer.parseInt
 
 class PreviewTripActivity : AppCompatActivity() {
+
+    private val sharedPrefs by lazy {  getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE) }
+    private var isFavorite = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_preview_trip)
@@ -32,14 +34,94 @@ class PreviewTripActivity : AppCompatActivity() {
         val tripId = intent.getStringExtra("tripId")
 
         val back = findViewById<Button>(R.id.backButton)
+        val favorite = findViewById<ImageButton>(R.id.favoriteBtn)
         back.setOnClickListener {
             val intentOpen = Intent(this@PreviewTripActivity, MainActivity::class.java)
             startActivity(intentOpen)
             finish()
         }
 
-        val url = "https://sevstory.nav-com.ru/app/api?q=getTripPreview&tripId=$tripId"
+        favorite.setOnClickListener {
+            if (!isFavorite) {
+                val token = getToken()
+                val url = "https://sevstory.nav-com.ru/app/api?q=setFavorite&tripId=$tripId&token=$token"
+                val getResponse = Get()
 
+                getResponse.run(
+                    url,
+                    object : Callback {
+                        override fun onFailure(call: Call, e: IOException) {
+                            runOnUiThread {
+                                Toast.makeText(
+                                    this@PreviewTripActivity,
+                                    "Ошибка добавления в избранное",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        }
+
+                        @Throws(IOException::class)
+                        override fun onResponse(call: Call, response: Response) {
+                            val stringResponse = response.body.string()
+                            val gson = Gson()
+
+                            val answer: AnswerModel = gson.fromJson(stringResponse, AnswerModel::class.java)
+                            if (answer.responseBody) {
+                                runOnUiThread {
+                                    favorite.setImageResource(R.drawable.ic_favorite_fill)
+                                }
+                                isFavorite = true
+                            } else {
+                                runOnUiThread {
+                                    Toast.makeText(
+                                        this@PreviewTripActivity,
+                                        "Ошибка добавления в избранное",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                            }
+                        }
+                    })
+            } else {
+                val token = getToken()
+                val url = "https://sevstory.nav-com.ru/app/api?q=setNotFavorite&tripId=$tripId&token=$token"
+                val getResponse = Get()
+
+                getResponse.run(
+                    url,
+                    object : Callback {
+                        override fun onFailure(call: Call, e: IOException) {
+                            runOnUiThread {
+                                Toast.makeText(this@PreviewTripActivity, "Ошибка удаления из избранного", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+
+                        @Throws(IOException::class)
+                        override fun onResponse(call: Call, response: Response) {
+                            val stringResponse = response.body.string()
+                            val gson = Gson()
+
+                            val answer: AnswerModel = gson.fromJson(stringResponse, AnswerModel::class.java)
+                            if (answer.responseBody) {
+                                runOnUiThread {
+                                    favorite.setImageResource(R.drawable.ic_favorite_border)
+                                }
+                                isFavorite = false
+                            } else {
+                                runOnUiThread {
+                                    Toast.makeText(
+                                        this@PreviewTripActivity,
+                                        "Ошибка удаления из избранного",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                            }
+                        }
+                    })
+            }
+        }
+
+        val url = "https://sevstory.nav-com.ru/app/api?q=getTripPreview&tripId=$tripId"
         val getResponse = Get()
 
         getResponse.run(
@@ -134,4 +216,5 @@ class PreviewTripActivity : AppCompatActivity() {
     private fun getTrueScore (score: Float) : String {
         return score.toString()
     }
+        private fun getToken() = sharedPrefs.getString(TOKEN_KEY, "")
 }
