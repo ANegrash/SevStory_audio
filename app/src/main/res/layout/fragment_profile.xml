@@ -37,15 +37,15 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3">
 
         <ImageView
-            android:id="@+id/imageView6"
+            android:id="@+id/userImage"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:src="@drawable/ic_user_large_solid"
+            android:src="@drawable/user_default"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_user_large_solid" />
+            app:srcCompat="@drawable/user_default" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -171,7 +171,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/scoresAndComments"
+            android:id="@+id/favourites"
             android:layout_width="match_parent"
             android:layout_height="50dp">
 
@@ -192,7 +192,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="Оценки и отзывы"
+                android:text="Избранное"
                 android:textColor="@color/gray"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"

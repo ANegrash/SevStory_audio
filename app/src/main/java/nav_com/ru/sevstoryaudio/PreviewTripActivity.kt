@@ -31,7 +31,7 @@ class PreviewTripActivity : AppCompatActivity() {
         val intent = intent
         val tripId = intent.getStringExtra("tripId")
 
-        val back = findViewById<ImageButton>(R.id.backButton)
+        val back = findViewById<Button>(R.id.backButton)
         back.setOnClickListener {
             val intentOpen = Intent(this@PreviewTripActivity, MainActivity::class.java)
             startActivity(intentOpen)
@@ -68,7 +68,6 @@ class PreviewTripActivity : AppCompatActivity() {
                             val chipGroup = findViewById<ChipGroup>(R.id.chip_group)
                             val tripDescription = findViewById<TextView>(R.id.description_trip_preview)
                             val tripStart = findViewById<Button>(R.id.startButton)
-                            val back = findViewById<ImageButton>(R.id.backButton)
 
                             val tripLength = findViewById<TextView>(R.id.time_preview)
                             val tripScore = findViewById<TextView>(R.id.rating_preview)

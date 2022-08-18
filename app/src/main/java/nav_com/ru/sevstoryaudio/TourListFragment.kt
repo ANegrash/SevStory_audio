@@ -24,7 +24,9 @@ class TourListFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
+
+        val view1: View = inflater.inflate(R.layout.fragment_tour_list, container, false)
 
         val url = "https://sevstory.nav-com.ru/app/api?q=getAllTrips"
 
@@ -56,7 +58,7 @@ class TourListFragment : Fragment() {
                         )
 
                         activity?.runOnUiThread {
-                            val listView = view?.findViewById<ListView>(R.id.list_view)
+                            val listView = view1.findViewById<ListView>(R.id.list_view)
                             if (listView != null) {
                                 listView.adapter = allTripsAdapter
 
@@ -72,6 +74,6 @@ class TourListFragment : Fragment() {
                 }
             })
 
-        return inflater.inflate(R.layout.fragment_tour_list, container, false)
+        return view1
     }
 }

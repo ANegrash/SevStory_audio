@@ -50,10 +50,9 @@ class SightActivity : AppCompatActivity() {
                 if (route.lastIndex == currentIndex) {
                     toNextMap.text = "Завершить экскурсию"
                     toNextSight.visibility = View.GONE
-                    saveRouts("")
 
                     toNextMap.setOnClickListener {
-                        val end_trip = Intent(this@SightActivity, MainActivity::class.java)
+                        val end_trip = Intent(this@SightActivity, EndTripActivity::class.java)
                         startActivity(end_trip)
                         finish()
                     }

@@ -35,7 +35,7 @@ class StartTripActivity : AppCompatActivity() {
         val monumentText = findViewById<TextView>(R.id.monumentInfoText)
         val toSight = findViewById<Button>(R.id.goToFirstSight)
         val toMap = findViewById<Button>(R.id.goToMapFirstly)
-        val resetRoute = findViewById<ImageButton>(R.id.resetRoute)
+        val resetRoute = findViewById<Button>(R.id.resetRoute)
 
         val jsonString = getSavedRouts()
         if (!jsonString.isNullOrEmpty()) {
@@ -84,7 +84,9 @@ class StartTripActivity : AppCompatActivity() {
                 loading.visibility = View.VISIBLE
                 infoText.text = "Загружаем маршрут нашего путешествия. Нужно немного подождать."
 
-                val url = "https://sevstory.nav-com.ru/app/api?q=getTripRoute&tripId=$tripId"
+                val userToken = getToken()
+
+                val url = "https://sevstory.nav-com.ru/app/api?q=getTripRoute&tripId=$tripId&token=$userToken"
 
                 val getResponse = Get()
 
@@ -142,7 +144,7 @@ class StartTripActivity : AppCompatActivity() {
                                     }
 
                                     toSight.setOnClickListener {
-                                        val savedRouteNew = SavedRoutesModel(1, tripId, route)
+                                        val savedRouteNew = SavedRoutesModel(1, tripId,  route)
                                         saveRouts(gson.toJson(savedRouteNew))
                                         val sight_intent = Intent(
                                             this@StartTripActivity,
@@ -164,4 +166,6 @@ class StartTripActivity : AppCompatActivity() {
     private fun getSavedRouts() = sharedPrefs.getString(KEY_ROUTS, "")
 
     private fun saveRouts (routes: String) = sharedPrefs.edit().putString(KEY_ROUTS, routes).apply()
+
+    private fun getToken() = sharedPrefs.getString(TOKEN_KEY, "")
 }

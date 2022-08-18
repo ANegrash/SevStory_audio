@@ -18,13 +18,15 @@ class ProfileFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val changePhoto = view?.findViewById<ConstraintLayout>(R.id.photoRedaction)
-        val emailField = view?.findViewById<ConstraintLayout>(R.id.emailField)
-        val changePersonalData = view?.findViewById<ConstraintLayout>(R.id.redactPersonalInfo)
-        val tourHistory = view?.findViewById<ConstraintLayout>(R.id.viewedTours)
-        val scoresAndComments = view?.findViewById<ConstraintLayout>(R.id.scoresAndComments)
-        val aboutApp = view?.findViewById<ConstraintLayout>(R.id.aboutApp)
+    ): View {
+        val view1: View = inflater.inflate(R.layout.fragment_profile, container, false)
+
+        val changePhoto = view1.findViewById<ConstraintLayout>(R.id.photoRedaction)
+        val emailField = view1.findViewById<ConstraintLayout>(R.id.emailField)
+        val changePersonalData = view1.findViewById<ConstraintLayout>(R.id.redactPersonalInfo)
+        val tourHistory = view1.findViewById<ConstraintLayout>(R.id.viewedTours)
+        val favourites = view1.findViewById<ConstraintLayout>(R.id.favourites)
+        val aboutApp = view1.findViewById<ConstraintLayout>(R.id.aboutApp)
 
         val email = getEmail()
         if (!email.isNullOrEmpty()) {
@@ -35,27 +37,27 @@ class ProfileFragment : Fragment() {
             emailField?.visibility = View.GONE
         }
 
-        changePhoto?.setOnClickListener {
+        changePhoto.setOnClickListener {
             Toast.makeText(context, "Изменение фотографии пока недоступно", Toast.LENGTH_LONG).show()
         }
 
-        changePersonalData?.setOnClickListener {
+        changePersonalData.setOnClickListener {
             Toast.makeText(context, "Изменение личных данных пока недоступно", Toast.LENGTH_LONG).show()
         }
 
-        tourHistory?.setOnClickListener {
+        tourHistory.setOnClickListener {
             Toast.makeText(context, "Просмотр истории туров пока недоступен", Toast.LENGTH_LONG).show()
         }
 
-        scoresAndComments?.setOnClickListener {
-            Toast.makeText(context, "Просмотр оценок и отзывов пока недоступен", Toast.LENGTH_LONG).show()
+        favourites.setOnClickListener {
+            Toast.makeText(context, "Работа с избранным пока что недоступна", Toast.LENGTH_LONG).show()
         }
 
-        aboutApp?.setOnClickListener {
+        aboutApp.setOnClickListener {
             Toast.makeText(context, "Тут будет чё-то эпичное, но пока что тут ничего нет", Toast.LENGTH_LONG).show()
         }
 
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+        return view1
     }
 
     private fun getEmail() = sharedPrefs?.getString(EMAIL_KEY, "")

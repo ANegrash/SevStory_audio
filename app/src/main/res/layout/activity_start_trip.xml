@@ -6,13 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".StartTripActivity">
 
-    <ImageButton
+    <Button
         android:id="@+id/resetRoute"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/ic_back_circle"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/transparent"
+        android:shadowColor="@android:color/transparent"
+        android:text="назад"
+        android:textAllCaps="true"
+        android:textColor="@color/dark_gray"
+        app:icon="@drawable/ic_arrow_back"
+        app:iconTint="@color/dark_gray"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -127,6 +132,7 @@
             android:layout_marginEnd="16dp"
             android:backgroundTint="@color/blue"
             android:text="Я рядом с первой точкой"
+            android:textColor="@color/white"
             app:cornerRadius="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
