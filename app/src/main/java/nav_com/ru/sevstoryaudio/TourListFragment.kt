@@ -1,5 +1,6 @@
 package nav_com.ru.sevstoryaudio
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -20,6 +21,8 @@ import java.io.IOException
 
 class TourListFragment : Fragment() {
 
+    private val sharedPrefs by lazy { activity?.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE) }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -28,7 +31,7 @@ class TourListFragment : Fragment() {
 
         val view1: View = inflater.inflate(R.layout.fragment_tour_list, container, false)
 
-        val url = "https://sevstory.nav-com.ru/app/api?q=getAllTrips"
+        val url = "https://sevstory.nav-com.ru/app/api?q=getAllTrips&token=" + getToken()
 
         val getResponse = Get()
 
@@ -76,4 +79,7 @@ class TourListFragment : Fragment() {
 
         return view1
     }
+
+    private fun getToken() = sharedPrefs?.getString(TOKEN_KEY, "")
+
 }

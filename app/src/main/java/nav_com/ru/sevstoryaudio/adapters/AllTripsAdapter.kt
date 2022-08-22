@@ -33,6 +33,7 @@ class AllTripsAdapter (
         val minutes = view.findViewById<TextView>(R.id.time_trip)
         val points = view.findViewById<TextView>(R.id.trip_points)
         val image = view.findViewById<ImageView>(R.id.iconTrip)
+        val isLikedImg = view.findViewById<ImageView>(R.id.liked_inAllTrips)
 
         image.clipToOutline = true
         val url = "https://sevstory.nav-com.ru/app/img/tour_icons/" + tripObj.tripIcon
@@ -46,6 +47,10 @@ class AllTripsAdapter (
         nameTrip.text = tripObj.tripName
         minutes.text = getTrueMinutes(tripObj.minutes)
         points.text = getTruePoints(tripObj.countMonuments)
+        if (tripObj.isLiked)
+            isLikedImg.visibility = View.VISIBLE
+        else
+            isLikedImg.visibility = View.GONE
 
         return view
     }

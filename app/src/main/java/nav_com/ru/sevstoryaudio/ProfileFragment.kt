@@ -1,6 +1,7 @@
 package nav_com.ru.sevstoryaudio
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -50,7 +51,9 @@ class ProfileFragment : Fragment() {
         }
 
         favourites.setOnClickListener {
-            Toast.makeText(context, "Работа с избранным пока что недоступна", Toast.LENGTH_LONG).show()
+            val intent = Intent(context, FavoriteList::class.java)
+            startActivity(intent)
+            activity?.finish()
         }
 
         aboutApp.setOnClickListener {

@@ -32,11 +32,16 @@ class PreviewTripActivity : AppCompatActivity() {
 
         val intent = intent
         val tripId = intent.getStringExtra("tripId")
+        val backPage = intent.getStringExtra("return")
 
         val back = findViewById<Button>(R.id.backButton)
         val favorite = findViewById<ImageButton>(R.id.favoriteBtn)
         back.setOnClickListener {
-            val intentOpen = Intent(this@PreviewTripActivity, MainActivity::class.java)
+            val intentOpen : Intent
+            if (backPage == "favorite")
+                intentOpen = Intent(this@PreviewTripActivity, FavoriteList::class.java)
+            else
+                intentOpen = Intent(this@PreviewTripActivity, MainActivity::class.java)
             startActivity(intentOpen)
             finish()
         }
@@ -121,7 +126,7 @@ class PreviewTripActivity : AppCompatActivity() {
             }
         }
 
-        val url = "https://sevstory.nav-com.ru/app/api?q=getTripPreview&tripId=$tripId"
+        val url = "https://sevstory.nav-com.ru/app/api?q=getTripPreview&tripId=$tripId&token=" + getToken()
         val getResponse = Get()
 
         getResponse.run(
@@ -151,6 +156,11 @@ class PreviewTripActivity : AppCompatActivity() {
                             val tripDescription = findViewById<TextView>(R.id.description_trip_preview)
                             val tripStart = findViewById<Button>(R.id.startButton)
 
+                            if (tripPreview.isFavorite) {
+                                favorite.setImageResource(R.drawable.ic_favorite_fill)
+                                isFavorite = true
+                            }
+
                             val tripLength = findViewById<TextView>(R.id.time_preview)
                             val tripScore = findViewById<TextView>(R.id.rating_preview)
                             val tripViewed = findViewById<TextView>(R.id.countViewed)
@@ -166,8 +176,6 @@ class PreviewTripActivity : AppCompatActivity() {
                             for (item in tripPreview.sightsArray) {
                                 val chip = Chip(this@PreviewTripActivity)
                                 chip.text = item
-                                chip.chipIcon = getDrawable(R.drawable.ic_location)
-                                chip.isChipIconVisible = false
                                 chip.isClickable = false
                                 chip.isCheckable = false
                                 chip.setChipBackgroundColorResource(R.color.white)
@@ -216,5 +224,6 @@ class PreviewTripActivity : AppCompatActivity() {
     private fun getTrueScore (score: Float) : String {
         return score.toString()
     }
-        private fun getToken() = sharedPrefs.getString(TOKEN_KEY, "")
+
+    private fun getToken() = sharedPrefs.getString(TOKEN_KEY, "")
 }

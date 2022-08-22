@@ -1,10 +1,8 @@
 package nav_com.ru.sevstoryaudio.models
 
-data class AllTripsModel(
+data class FavModel(
     val tripId: Int,
     val tripName: String,
-    val minutes: Int,
-    val countMonuments: Int,
     val tripIcon: String,
-    val isLiked: Boolean
+    val added: String
 )

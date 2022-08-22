@@ -47,6 +47,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        val intent = intent
+        val backPage = intent.getStringExtra("return")
+
         if (isFirstrun()) {
             //TODO: first introducing activity
             //setFirstrun()
@@ -84,16 +87,25 @@ class MainActivity : AppCompatActivity() {
         }
 
         val bnView = findViewById<NavigationBarView>(R.id.bottom_navigation)
-
-        bnView.selectedItemId = R.id.page_1
-
         val tourListFragment: Fragment = TourListFragment()
         val profileFragment: Fragment = ProfileFragment()
         val fragmentManager: FragmentManager = supportFragmentManager
         var active: Fragment = tourListFragment
 
-        fragmentManager.beginTransaction().add(R.id.main_container, profileFragment, "2").hide(profileFragment).commit()
-        fragmentManager.beginTransaction().add(R.id.main_container, tourListFragment, "1").commit()
+        if (backPage == "profile") {
+            bnView.selectedItemId = R.id.page_2
+            fragmentManager.beginTransaction().add(R.id.main_container, tourListFragment, "2")
+                .hide(tourListFragment).commit()
+            fragmentManager.beginTransaction().add(R.id.main_container, profileFragment, "1")
+                .commit()
+            active = profileFragment
+        } else {
+            bnView.selectedItemId = R.id.page_1
+            fragmentManager.beginTransaction().add(R.id.main_container, profileFragment, "2")
+                .hide(profileFragment).commit()
+            fragmentManager.beginTransaction().add(R.id.main_container, tourListFragment, "1")
+                .commit()
+        }
 
         bnView.setOnItemSelectedListener { item ->
             when (item.itemId) {
