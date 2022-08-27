@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.*
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.gson.Gson
@@ -30,6 +31,7 @@ class PreviewTripActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_preview_trip)
 
+        setScreen(0, 1, 0)
         val intent = intent
         val tripId = intent.getStringExtra("tripId")
         val backPage = intent.getStringExtra("return")
@@ -134,7 +136,7 @@ class PreviewTripActivity : AppCompatActivity() {
             object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
                     runOnUiThread {
-
+                        setError()
                     }
                 }
 
@@ -169,8 +171,6 @@ class PreviewTripActivity : AppCompatActivity() {
 
                             Picasso.get()
                                 .load(url)
-                                .placeholder(R.drawable.ic_launcher_background)
-                                .error(R.drawable.ic_launcher_background)
                                 .into(tripImage)
 
                             for (item in tripPreview.sightsArray) {
@@ -196,6 +196,7 @@ class PreviewTripActivity : AppCompatActivity() {
                                 startActivity(intentOpen)
                             }
 
+                            setScreen()
                         }
                     }
                 }
@@ -226,4 +227,43 @@ class PreviewTripActivity : AppCompatActivity() {
     }
 
     private fun getToken() = sharedPrefs.getString(TOKEN_KEY, "")
+
+    private fun setScreen(
+        mainScreen: Int = 1,
+        loadingScreen: Int = 0,
+        errorScreen: Int = 0
+    ) {
+        val mainScreenActivity = findViewById<ConstraintLayout>(R.id.mainScreen_preview_trip)
+        val loadingScreenActivity = findViewById<ConstraintLayout>(R.id.loadingScreen_preview_trip)
+        val errorScreenActivity = findViewById<ConstraintLayout>(R.id.errorScreen_preview_trip)
+        val favBtn = findViewById<ImageButton>(R.id.favoriteBtn)
+
+        when (mainScreen) {
+            0 -> {
+                favBtn.visibility = View.GONE
+                mainScreenActivity.visibility = View.GONE
+            }
+            1 -> {
+                favBtn.visibility = View.VISIBLE
+                mainScreenActivity.visibility = View.VISIBLE
+            }
+        }
+
+        when (loadingScreen) {
+            0 -> loadingScreenActivity.visibility = View.GONE
+            1 -> loadingScreenActivity.visibility = View.VISIBLE
+        }
+
+        when (errorScreen) {
+            0 -> errorScreenActivity.visibility = View.GONE
+            1 -> errorScreenActivity.visibility = View.VISIBLE
+        }
+    }
+
+    private fun setError(
+        code: Int = 0,
+        message: String = "Произошла неизвестная ошибка, попробуйте позже"
+    ) {
+        setScreen(0, 0, 1)
+    }
 }
