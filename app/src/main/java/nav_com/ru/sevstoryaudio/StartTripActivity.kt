@@ -40,7 +40,7 @@ class StartTripActivity : AppCompatActivity() {
             val oldSavedRoute = Gson().fromJson(jsonString, SavedRoutesModel::class.java)
             done.visibility = View.VISIBLE
             loading.visibility = View.GONE
-            infoText.text = "Первой точкой нашей экскурсии является"
+            infoText.text = resources.getString(R.string.start_trip_first_point_heading)
             monumentText.text = oldSavedRoute.route[0].sightName
 
             toMap.setOnClickListener {
@@ -80,7 +80,7 @@ class StartTripActivity : AppCompatActivity() {
             } else {
                 done.visibility = View.GONE
                 loading.visibility = View.VISIBLE
-                infoText.text = "Загружаем маршрут нашего путешествия. Нужно немного подождать."
+                infoText.text = resources.getString(R.string.start_trip_waiting_heading)
 
                 val userToken = getToken()
 
@@ -123,8 +123,7 @@ class StartTripActivity : AppCompatActivity() {
                                 runOnUiThread {
                                     done.visibility = View.VISIBLE
                                     loading.visibility = View.GONE
-                                    infoText.text =
-                                        "Первой точкой нашей экскурсии является"
+                                    infoText.text = resources.getString(R.string.start_trip_first_point_heading)
 
                                     monumentText.text = route[0].sightName
 

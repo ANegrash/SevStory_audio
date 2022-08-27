@@ -55,20 +55,23 @@ class AllTripsAdapter (
         return view
     }
 
-    private fun getTrueMinutes (minutes: Int) : String {
+    private fun getTrueMinutes (
+        minutes: Int
+    ) : String {
         var result = ""
         val hours = minutes / 60
+
         if (hours != 0) {
             result +=  " $hours "
             result += when (hours) {
                 1 -> {
-                    "час"
+                    context.resources.getString(R.string.declensions_hour_1)
                 }
                 2, 3, 4 -> {
-                    "часа"
+                    context.resources.getString(R.string.declensions_hour_2)
                 }
                 else -> {
-                    "часов"
+                    context.resources.getString(R.string.declensions_hour_3)
                 }
             }
         }
@@ -80,17 +83,17 @@ class AllTripsAdapter (
             val lastCharOfMin = leftMinutes % 10
 
             result += if (leftMinutes in 11..19) {
-                "минут"
+                context.resources.getString(R.string.declensions_minute_3)
             } else {
                 when (lastCharOfMin) {
                     1 -> {
-                        "минута"
+                        context.resources.getString(R.string.declensions_minute_1)
                     }
                     2, 3, 4 -> {
-                        "минуты"
+                        context.resources.getString(R.string.declensions_minute_2)
                     }
                     else -> {
-                        "минут"
+                        context.resources.getString(R.string.declensions_minute_3)
                     }
                 }
             }
@@ -100,18 +103,21 @@ class AllTripsAdapter (
     }
 
     private fun getTruePoints (countPoints : Int) : String {
+        val p1 = context.resources.getString(R.string.declensions_point_1)
+        val p2 = context.resources.getString(R.string.declensions_point_2)
+        val p3 = context.resources.getString(R.string.declensions_point_3)
         return when (countPoints) {
             1, 21 -> {
-                "$countPoints точка"
+                "$countPoints $p1"
             }
             in 5..20, in 25..30 -> {
-                "$countPoints точек"
+                "$countPoints $p3"
             }
             in 2..4, in 22..24 -> {
-                "$countPoints точки"
+                "$countPoints $p2"
             }
             else -> {
-                "$countPoints точек"
+                "$countPoints $p3"
             }
         }
     }

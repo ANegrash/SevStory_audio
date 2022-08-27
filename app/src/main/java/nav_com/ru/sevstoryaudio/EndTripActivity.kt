@@ -24,7 +24,7 @@ class EndTripActivity : AppCompatActivity() {
         val buttonOk = findViewById<Button>(R.id.missOrScore)
 
         rating.setOnRatingBarChangeListener { _, _, _ ->
-            buttonOk.text = "Отправить оценку"
+            buttonOk.text = resources.getString(R.string.btn_score)
         }
 
         buttonOk.setOnClickListener {

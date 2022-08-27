@@ -1,10 +1,57 @@
 <resources>
     <string name="app_name">SevStory audio</string>
-    <string name="tour_title">Туры</string>
-    <string name="profile_title">Профиль</string>
     <string name="current_app_version">1.0.0</string>
+
+    <string name="title_tour">Туры</string>
+    <string name="title_profile">Профиль</string>
+    <string name="title_favorite">Избранное</string>
+    <string name="title_avatar_changing">Изменение аватара</string>
 
     <string name="err_no_internet">Проверьте интернет-соединение</string>
     <string name="err_unknown">Произошла неизвестная ошибка, попробуйте позже</string>
     <string name="err_no_favorite">Вы ничего не добавили в Избранное</string>
+    <string name="err_add_to_favorite">Ошибка добавления в Избранное</string>
+    <string name="err_remove_from_favorite">Ошибка удаления из Избранного</string>
+    <string name="err_set_picture">Ошибка установки аватара</string>
+
+    <string name="profile_menu_change_personal_data">Изменить личные данные</string>
+    <string name="profile_menu_tours_history">История туров</string>
+    <string name="profile_menu_favorite">Избранное</string>
+    <string name="profile_menu_about_app">О приложении</string>
+    <string name="profile_app_version_title">Версия приложения</string>
+
+    <string name="preview_trip_what_see">Что посетим?</string>
+    <string name="preview_trip_description">Описание</string>
+    <string name="preview_trip_h">ч</string>
+    <string name="preview_trip_min">мин</string>
+
+    <string name="start_trip_last_step">Последний шаг перед началом…</string>
+    <string name="start_trip_waiting_heading">Загружаем маршрут нашего путешествия, нужно немного подождать</string>
+    <string name="start_trip_first_point_heading">Первой точкой нашей экскурсии является</string>
+
+    <string name="end_trip_header">Экскурсия завершена!</string>
+    <string name="end_trip_rate_please">Оцените её, пожалуйста</string>
+
+    <string name="btn_back">назад</string>
+    <string name="btn_save">Сохранить</string>
+    <string name="btn_start_trip">Начать!</string>
+    <string name="btn_to_first_sight">Я рядом с первой точкой</string>
+    <string name="btn_to_first_sight_map">Маршрут к первой точке</string>
+    <string name="btn_to_next_sight">О следующей точке</string>
+    <string name="btn_to_next_sight_map">Путь к следующей точке</string>
+    <string name="btn_end_trip">Завершить экскурсию</string>
+    <string name="btn_miss_rate">Пропустить</string>
+    <string name="btn_score">Отправить оценку</string>
+
+    <string name="declensions_hour_1">час</string>
+    <string name="declensions_hour_2">часа</string>
+    <string name="declensions_hour_3">часов</string>
+
+    <string name="declensions_minute_1">минута</string>
+    <string name="declensions_minute_2">минуты</string>
+    <string name="declensions_minute_3">минут</string>
+
+    <string name="declensions_point_1">точка</string>
+    <string name="declensions_point_2">точки</string>
+    <string name="declensions_point_3">точек</string>
 </resources>

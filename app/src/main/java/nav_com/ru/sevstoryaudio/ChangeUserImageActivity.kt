@@ -83,7 +83,7 @@ class ChangeUserImageActivity : AppCompatActivity() {
                         runOnUiThread {
                             Toast.makeText(
                                 this@ChangeUserImageActivity,
-                                "Ошибка установки изображения",
+                                resources.getString(R.string.err_set_picture),
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
@@ -107,7 +107,7 @@ class ChangeUserImageActivity : AppCompatActivity() {
                             runOnUiThread {
                                 Toast.makeText(
                                     this@ChangeUserImageActivity,
-                                    "Ошибка установки изображения",
+                                    resources.getString(R.string.err_set_picture),
                                     Toast.LENGTH_SHORT
                                 ).show()
                             }

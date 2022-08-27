@@ -4,10 +4,10 @@
         android:id="@+id/page_1"
         android:enabled="true"
         android:icon="@drawable/ic_landmark"
-        android:title="@string/tour_title"/>
+        android:title="@string/title_tour"/>
     <item
         android:id="@+id/page_2"
         android:enabled="true"
         android:icon="@drawable/ic_user_large_solid"
-        android:title="@string/profile_title"/>
+        android:title="@string/title_profile"/>
 </menu>

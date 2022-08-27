@@ -46,7 +46,7 @@ class SightActivity : AppCompatActivity() {
                 sightName.text = route[currentIndex].sightName
 
                 if (route.lastIndex == currentIndex) {
-                    toNextMap.text = "Завершить экскурсию"
+                    toNextMap.text = resources.getString(R.string.btn_end_trip)
                     toNextSight.visibility = View.GONE
 
                     toNextMap.setOnClickListener {

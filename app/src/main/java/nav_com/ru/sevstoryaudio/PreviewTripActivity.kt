@@ -56,7 +56,7 @@ class PreviewTripActivity : AppCompatActivity() {
                             runOnUiThread {
                                 Toast.makeText(
                                     this@PreviewTripActivity,
-                                    "Ошибка добавления в избранное",
+                                    resources.getString(R.string.err_add_to_favorite),
                                     Toast.LENGTH_SHORT
                                 ).show()
                             }
@@ -77,7 +77,7 @@ class PreviewTripActivity : AppCompatActivity() {
                                 runOnUiThread {
                                     Toast.makeText(
                                         this@PreviewTripActivity,
-                                        "Ошибка добавления в избранное",
+                                        resources.getString(R.string.err_add_to_favorite),
                                         Toast.LENGTH_SHORT
                                     ).show()
                                 }
@@ -94,7 +94,11 @@ class PreviewTripActivity : AppCompatActivity() {
                     object : Callback {
                         override fun onFailure(call: Call, e: IOException) {
                             runOnUiThread {
-                                Toast.makeText(this@PreviewTripActivity, "Ошибка удаления из избранного", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    this@PreviewTripActivity,
+                                    resources.getString(R.string.err_remove_from_favorite),
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                         }
 
@@ -113,7 +117,7 @@ class PreviewTripActivity : AppCompatActivity() {
                                 runOnUiThread {
                                     Toast.makeText(
                                         this@PreviewTripActivity,
-                                        "Ошибка удаления из избранного",
+                                        resources.getString(R.string.err_remove_from_favorite),
                                         Toast.LENGTH_SHORT
                                     ).show()
                                 }
@@ -208,13 +212,16 @@ class PreviewTripActivity : AppCompatActivity() {
 
     private fun getTrueMinutes (minutes: Int) : String {
         var result = ""
+        val h = resources.getString(R.string.preview_trip_h)
+        val m = resources.getString(R.string.preview_trip_min)
+
         val hours = minutes / 60
         if (hours != 0)
-            result += "$hours ч "
+            result += "$hours $h "
 
         val leftMinutes = minutes % 60
         if (leftMinutes != 0)
-            result += "$leftMinutes мин"
+            result += "$leftMinutes $m"
 
         return result
     }
