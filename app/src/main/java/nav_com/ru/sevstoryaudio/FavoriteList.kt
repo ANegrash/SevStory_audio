@@ -4,12 +4,10 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.gson.Gson
-import nav_com.ru.sevstoryaudio.adapters.AllTripsAdapter
 import nav_com.ru.sevstoryaudio.adapters.FavTripsAdapter
 import nav_com.ru.sevstoryaudio.connection.Get
 import nav_com.ru.sevstoryaudio.models.*
@@ -17,7 +15,6 @@ import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response
 import java.io.IOException
-import kotlin.math.log
 
 class FavoriteList : AppCompatActivity() {
     private val sharedPrefs by lazy {  getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE) }
@@ -36,7 +33,7 @@ class FavoriteList : AppCompatActivity() {
         loadFavList()
     }
 
-    fun loadFavList () {
+    private fun loadFavList () {
         val url = "https://sevstory.nav-com.ru/app/api?q=getFavoriteList&token=" + getToken()
         val getResponse = Get()
 

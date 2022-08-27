@@ -6,8 +6,6 @@ import android.content.res.ColorStateList
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import android.widget.ImageButton
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.gson.Gson
@@ -28,7 +26,7 @@ class ChangeUserImageActivity : AppCompatActivity() {
         setContentView(R.layout.activity_change_user_image)
 
         val defBtn = findViewById<ConstraintLayout>(R.id.constraintLayout15)
-        val amphBtn = findViewById<ConstraintLayout>(R.id.constraintLayout14)
+        val amphoraBtn = findViewById<ConstraintLayout>(R.id.constraintLayout14)
         val camBtn = findViewById<ConstraintLayout>(R.id.constraintLayout16)
         val hotelBtn = findViewById<ConstraintLayout>(R.id.constraintLayout17)
         val planeBtn = findViewById<ConstraintLayout>(R.id.constraintLayout18)
@@ -52,7 +50,7 @@ class ChangeUserImageActivity : AppCompatActivity() {
             selectPic()
         }
 
-        amphBtn.setOnClickListener {
+        amphoraBtn.setOnClickListener {
             selectPic("amphora")
         }
 

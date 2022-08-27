@@ -5,11 +5,9 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
-import android.widget.ListView
 import android.widget.TextView
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
@@ -52,24 +50,24 @@ class SightActivity : AppCompatActivity() {
                     toNextSight.visibility = View.GONE
 
                     toNextMap.setOnClickListener {
-                        val end_trip = Intent(this@SightActivity, EndTripActivity::class.java)
-                        startActivity(end_trip)
+                        val endTrip = Intent(this@SightActivity, EndTripActivity::class.java)
+                        startActivity(endTrip)
                         finish()
                     }
                 } else {
                     oldSavedRoute.current = oldSavedRoute.current + 1
 
                     toNextMap.setOnClickListener {
-                        val map_intent = Intent(Intent.ACTION_VIEW)
-                        map_intent.data =
+                        val mapIntent = Intent(Intent.ACTION_VIEW)
+                        mapIntent.data =
                             Uri.parse(getGeoString(route[currentIndex + 1].longitude, route[currentIndex + 1].latitude, route[currentIndex + 1].sightName))
-                        startActivity(map_intent)
+                        startActivity(mapIntent)
                     }
 
                     toNextSight.setOnClickListener {
                         saveRouts(Gson().toJson(oldSavedRoute))
-                        val next_intent = Intent(this@SightActivity, SightActivity::class.java)
-                        startActivity(next_intent)
+                        val nextIntent = Intent(this@SightActivity, SightActivity::class.java)
+                        startActivity(nextIntent)
                         finish()
                     }
                 }
@@ -112,8 +110,8 @@ class SightActivity : AppCompatActivity() {
                     })
 
             } else {
-                val first_intent = Intent(this@SightActivity, PreviewTripActivity::class.java)
-                startActivity(first_intent)
+                val firstIntent = Intent(this@SightActivity, PreviewTripActivity::class.java)
+                startActivity(firstIntent)
             }
         }
 

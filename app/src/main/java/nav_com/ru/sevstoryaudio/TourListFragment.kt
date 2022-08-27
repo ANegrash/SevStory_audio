@@ -3,10 +3,8 @@ package nav_com.ru.sevstoryaudio
 import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
-import android.net.Network
 import android.net.NetworkInfo
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,8 +13,6 @@ import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.core.content.getSystemService
 import androidx.fragment.app.Fragment
 import com.google.gson.Gson
 import nav_com.ru.sevstoryaudio.adapters.AllTripsAdapter

@@ -1,12 +1,10 @@
 package nav_com.ru.sevstoryaudio.adapters
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import com.squareup.picasso.Picasso

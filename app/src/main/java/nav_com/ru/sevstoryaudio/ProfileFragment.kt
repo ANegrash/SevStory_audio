@@ -2,7 +2,6 @@ package nav_com.ru.sevstoryaudio
 
 import android.content.Context
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater

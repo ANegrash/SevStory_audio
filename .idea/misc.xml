@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/admin/AndroidStudioProjects/SevStoryaudio/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.17" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/SevStoryaudio/app/src/main/res/drawable/back_btn.xml" value="0.102" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/SevStoryaudio/app/src/main/res/drawable/ic_arrow_back.xml" value="0.172" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/SevStoryaudio/app/src/main/res/drawable/ic_back.xml" value="0.102" />
@@ -12,10 +13,12 @@
         <entry key="..\:/Users/admin/AndroidStudioProjects/SevStoryaudio/app/src/main/res/drawable/ic_clock.xml" value="0.102" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/SevStoryaudio/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.174" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/SevStoryaudio/app/src/main/res/drawable/ic_edit.xml" value="0.174" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/SevStoryaudio/app/src/main/res/drawable/ic_email.xml" value="0.17" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/SevStoryaudio/app/src/main/res/drawable/ic_favorite_border.xml" value="0.172" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/SevStoryaudio/app/src/main/res/drawable/ic_favorite_fill.xml" value="0.172" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/SevStoryaudio/app/src/main/res/drawable/ic_geopoint.xml" value="0.102" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/SevStoryaudio/app/src/main/res/drawable/ic_landmark.xml" value="0.174" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/SevStoryaudio/app/src/main/res/drawable/ic_launcher_background.xml" value="0.17" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/SevStoryaudio/app/src/main/res/drawable/ic_location.xml" value="0.102" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/SevStoryaudio/app/src/main/res/drawable/ic_phone.xml" value="0.174" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/SevStoryaudio/app/src/main/res/drawable/ic_tick.xml" value="0.174" />

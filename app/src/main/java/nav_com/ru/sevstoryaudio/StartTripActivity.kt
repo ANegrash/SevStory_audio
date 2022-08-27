@@ -5,12 +5,10 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.gson.Gson
-import com.google.gson.JsonArray
 import nav_com.ru.sevstoryaudio.connection.Get
 import nav_com.ru.sevstoryaudio.models.*
 import okhttp3.Call
@@ -46,17 +44,17 @@ class StartTripActivity : AppCompatActivity() {
             monumentText.text = oldSavedRoute.route[0].sightName
 
             toMap.setOnClickListener {
-                val map_intent = Intent(Intent.ACTION_VIEW)
-                map_intent.data =
+                val mapIntent = Intent(Intent.ACTION_VIEW)
+                mapIntent.data =
                     Uri.parse(getGeoString(oldSavedRoute.route[0].longitude, oldSavedRoute.route[0].latitude, oldSavedRoute.route[0].sightName))
-                startActivity(map_intent)
+                startActivity(mapIntent)
             }
 
             toSight.setOnClickListener {
                 val savedRouteNew = SavedRoutesModel(1, oldSavedRoute.tripId, oldSavedRoute.route)
                 saveRouts(Gson().toJson(savedRouteNew))
-                val sight_intent = Intent(this@StartTripActivity, SightActivity::class.java)
-                startActivity(sight_intent)
+                val sightIntent = Intent(this@StartTripActivity, SightActivity::class.java)
+                startActivity(sightIntent)
                 finish()
             }
 
@@ -131,8 +129,8 @@ class StartTripActivity : AppCompatActivity() {
                                     monumentText.text = route[0].sightName
 
                                     toMap.setOnClickListener {
-                                        val map_intent = Intent(Intent.ACTION_VIEW)
-                                        map_intent.data =
+                                        val mapIntent = Intent(Intent.ACTION_VIEW)
+                                        mapIntent.data =
                                             Uri.parse(
                                                 getGeoString(
                                                     route[0].longitude,
@@ -140,17 +138,17 @@ class StartTripActivity : AppCompatActivity() {
                                                     route[0].sightName
                                                 )
                                             )
-                                        startActivity(map_intent)
+                                        startActivity(mapIntent)
                                     }
 
                                     toSight.setOnClickListener {
                                         val savedRouteNew = SavedRoutesModel(1, tripId,  route)
                                         saveRouts(gson.toJson(savedRouteNew))
-                                        val sight_intent = Intent(
+                                        val sightIntent = Intent(
                                             this@StartTripActivity,
                                             SightActivity::class.java
                                         )
-                                        startActivity(sight_intent)
+                                        startActivity(sightIntent)
                                         finish()
                                     }
                                 }

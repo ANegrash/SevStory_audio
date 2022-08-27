@@ -4,10 +4,8 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.RatingBar
-import android.widget.Toast
 import com.google.gson.Gson
 import nav_com.ru.sevstoryaudio.connection.Get
 import nav_com.ru.sevstoryaudio.models.SavedRoutesModel
@@ -44,7 +42,7 @@ class EndTripActivity : AppCompatActivity() {
                     object : Callback {
                         override fun onFailure(call: Call, e: IOException) {
                             runOnUiThread {
-                                saveRouts("")
+                                saveRouts()
                                 val mainActivity = Intent(this@EndTripActivity, MainActivity::class.java)
                                 startActivity(mainActivity)
                                 finish()
@@ -54,7 +52,7 @@ class EndTripActivity : AppCompatActivity() {
                         @Throws(IOException::class)
                         override fun onResponse(call: Call, response: Response) {
                             runOnUiThread {
-                                saveRouts("")
+                                saveRouts()
                                 val mainActivity = Intent(this@EndTripActivity, MainActivity::class.java)
                                 startActivity(mainActivity)
                                 finish()
@@ -62,7 +60,7 @@ class EndTripActivity : AppCompatActivity() {
                         }
                     })
             } else {
-                saveRouts("")
+                saveRouts()
                 val mainActivity = Intent(this, MainActivity::class.java)
                 startActivity(mainActivity)
                 finish()
@@ -72,7 +70,7 @@ class EndTripActivity : AppCompatActivity() {
 
     private fun getSavedRouts() = sharedPrefs.getString(KEY_ROUTS, "")
 
-    private fun saveRouts (routes: String) = sharedPrefs.edit().putString(KEY_ROUTS, routes).apply()
+    private fun saveRouts() = sharedPrefs.edit().putString(KEY_ROUTS, "").apply()
 
     private fun getToken() = sharedPrefs.getString(TOKEN_KEY, "")
 }

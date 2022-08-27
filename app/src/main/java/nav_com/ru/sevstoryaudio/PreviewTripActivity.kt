@@ -2,10 +2,8 @@ package nav_com.ru.sevstoryaudio
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -13,14 +11,12 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
-import nav_com.ru.sevstoryaudio.adapters.AllTripsAdapter
 import nav_com.ru.sevstoryaudio.connection.Get
 import nav_com.ru.sevstoryaudio.models.*
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response
 import java.io.IOException
-import java.lang.Integer.parseInt
 
 class PreviewTripActivity : AppCompatActivity() {
 
@@ -39,11 +35,10 @@ class PreviewTripActivity : AppCompatActivity() {
         val back = findViewById<Button>(R.id.backButton)
         val favorite = findViewById<ImageButton>(R.id.favoriteBtn)
         back.setOnClickListener {
-            val intentOpen : Intent
-            if (backPage == "favorite")
-                intentOpen = Intent(this@PreviewTripActivity, FavoriteList::class.java)
+            val intentOpen : Intent = if (backPage == "favorite")
+                Intent(this@PreviewTripActivity, FavoriteList::class.java)
             else
-                intentOpen = Intent(this@PreviewTripActivity, MainActivity::class.java)
+                Intent(this@PreviewTripActivity, MainActivity::class.java)
             startActivity(intentOpen)
             finish()
         }
@@ -167,10 +162,10 @@ class PreviewTripActivity : AppCompatActivity() {
                             val tripScore = findViewById<TextView>(R.id.rating_preview)
                             val tripViewed = findViewById<TextView>(R.id.countViewed)
 
-                            val url = "https://sevstory.nav-com.ru/app/img/tour_preview/" + tripPreview.image
+                            val urlImage = "https://sevstory.nav-com.ru/app/img/tour_preview/" + tripPreview.image
 
                             Picasso.get()
-                                .load(url)
+                                .load(urlImage)
                                 .into(tripImage)
 
                             for (item in tripPreview.sightsArray) {
@@ -188,7 +183,7 @@ class PreviewTripActivity : AppCompatActivity() {
                             tripName.text = tripPreview.tripName
                             tripLength.text = getTrueMinutes(tripPreview.length)
                             tripScore.text = getTrueScore(tripPreview.score)
-                            tripViewed.text = "" + tripPreview.viewed
+                            tripViewed.text = tripPreview.viewed.toString()
                             tripDescription.text = tripPreview.description
                             tripStart.setOnClickListener {
                                 val intentOpen = Intent(this@PreviewTripActivity, StartTripActivity::class.java)
@@ -261,8 +256,8 @@ class PreviewTripActivity : AppCompatActivity() {
     }
 
     private fun setError(
-        code: Int = 0,
-        message: String = "Произошла неизвестная ошибка, попробуйте позже"
+        //code: Int = 0,
+        //message: String = "Произошла неизвестная ошибка, попробуйте позже"
     ) {
         setScreen(0, 0, 1)
     }
