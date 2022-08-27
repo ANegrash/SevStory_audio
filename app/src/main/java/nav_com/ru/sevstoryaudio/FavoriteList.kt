@@ -30,6 +30,8 @@ class FavoriteList : AppCompatActivity() {
             finish()
         }
 
+        setScreen(0, 1, 0)
+
         loadFavList()
     }
 
@@ -42,7 +44,7 @@ class FavoriteList : AppCompatActivity() {
             object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
                     runOnUiThread {
-                        setError()
+                        setError(1, resources.getString(R.string.err_no_internet))
                     }
                 }
 
@@ -54,37 +56,46 @@ class FavoriteList : AppCompatActivity() {
                     val favoriteListModel: ResponseFavModel =
                         gson.fromJson(stringResponse, ResponseFavModel::class.java)
 
-                    val favoriteList: List<FavModel> =
-                        favoriteListModel.responseBody
+                    if (favoriteListModel.code == 200) {
 
-                    if (favoriteList.isEmpty()) {
-                        runOnUiThread {
-                            setError()
+                        val favoriteList: List<FavModel> =
+                            favoriteListModel.responseBody
+
+                        if (favoriteList.isEmpty()) {
+                            runOnUiThread {
+                                setError(2, resources.getString(R.string.err_no_favorite))
+                            }
+                        } else {
+                            val favTripsAdapter = FavTripsAdapter(
+                                this@FavoriteList,
+                                R.layout.fav_item,
+                                favoriteList
+                            )
+
+                            runOnUiThread {
+                                val favListWidget = findViewById<ListView>(R.id.fav_list)
+                                favListWidget.adapter = favTripsAdapter
+
+                                favListWidget.onItemClickListener =
+                                    AdapterView.OnItemClickListener { _, _, position, _ ->
+                                        val intent =
+                                            Intent(
+                                                this@FavoriteList,
+                                                PreviewTripActivity::class.java
+                                            )
+                                        intent.putExtra(
+                                            "tripId",
+                                            favoriteList[position].tripId.toString()
+                                        )
+                                        intent.putExtra("return", "favorite")
+                                        startActivity(intent)
+                                        finish()
+                                    }
+                                setScreen()
+                            }
                         }
                     } else {
-                        val favTripsAdapter = FavTripsAdapter(
-                            this@FavoriteList,
-                            R.layout.fav_item,
-                            favoriteList
-                        )
-
-                        runOnUiThread {
-                            val favListWidget = findViewById<ListView>(R.id.fav_list)
-                            favListWidget.adapter = favTripsAdapter
-
-                            favListWidget.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
-                                    val intent =
-                                        Intent(this@FavoriteList, PreviewTripActivity::class.java)
-                                    intent.putExtra(
-                                        "tripId",
-                                        favoriteList[position].tripId.toString()
-                                    )
-                                    intent.putExtra("return","favorite")
-                                    startActivity(intent)
-                                    finish()
-                                }
-                            setScreen()
-                        }
+                        setError()
                     }
                 }
             })
@@ -96,18 +107,18 @@ class FavoriteList : AppCompatActivity() {
         error: Int = 0
     ) {
         val mainScreen = findViewById<ConstraintLayout>(R.id.fav_list_container)
-        //val loadingScreen = findViewById<ConstraintLayout>(R.id.fav_list_container)
-        val errorScreen = findViewById<ConstraintLayout>(R.id.emptyError)
+        val loadingScreen = findViewById<ConstraintLayout>(R.id.fav_list_loading)
+        val errorScreen = findViewById<ConstraintLayout>(R.id.fav_list_error)
 
         when (main) {
             0 -> mainScreen.visibility = View.GONE
             1 -> mainScreen.visibility = View.VISIBLE
         }
 
-//        when (loading) {
-//            0 -> loadingScreen.visibility = View.GONE
-//            1 -> loadingScreen.visibility = View.VISIBLE
-//        }
+        when (loading) {
+            0 -> loadingScreen.visibility = View.GONE
+            1 -> loadingScreen.visibility = View.VISIBLE
+        }
 
         when (error) {
             0 -> errorScreen.visibility = View.GONE
@@ -117,10 +128,18 @@ class FavoriteList : AppCompatActivity() {
 
     private fun setError (
         code: Int = 0,
-        message: String = ""
+        message: String = resources.getString(R.string.err_unknown)
     ) {
         val errorIcon = findViewById<ImageView>(R.id.errorImage_fav)
         val errorText = findViewById<TextView>(R.id.errorText_fav)
+
+        errorText.text = message
+
+        when (code) {
+            0 -> errorIcon.setImageResource(R.drawable.err_unknown)
+            1 -> errorIcon.setImageResource(R.drawable.err_check_internet)
+            2 -> errorIcon.setImageResource(R.drawable.crashed_hurt)
+        }
 
         setScreen(0, 0, 1)
     }

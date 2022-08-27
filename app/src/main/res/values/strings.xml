@@ -3,4 +3,8 @@
     <string name="tour_title">Туры</string>
     <string name="profile_title">Профиль</string>
     <string name="current_app_version">1.0.0</string>
+
+    <string name="err_no_internet">Проверьте интернет-соединение</string>
+    <string name="err_unknown">Произошла неизвестная ошибка, попробуйте позже</string>
+    <string name="err_no_favorite">Вы ничего не добавили в Избранное</string>
 </resources>

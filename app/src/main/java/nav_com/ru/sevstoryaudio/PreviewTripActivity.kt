@@ -131,7 +131,7 @@ class PreviewTripActivity : AppCompatActivity() {
             object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
                     runOnUiThread {
-                        setError()
+                        setError(1, resources.getString(R.string.err_no_internet))
                     }
                 }
 
@@ -193,6 +193,8 @@ class PreviewTripActivity : AppCompatActivity() {
 
                             setScreen()
                         }
+                    } else {
+                        setError()
                     }
                 }
             })
@@ -256,9 +258,19 @@ class PreviewTripActivity : AppCompatActivity() {
     }
 
     private fun setError(
-        //code: Int = 0,
-        //message: String = "Произошла неизвестная ошибка, попробуйте позже"
+        code: Int = 0,
+        message: String = resources.getString(R.string.err_unknown)
     ) {
+        val errorIcon = findViewById<ImageView>(R.id.errorImage_preview_trip)
+        val errorText = findViewById<TextView>(R.id.errorText_preview_trip)
+
+        errorText.text = message
+
+        when (code) {
+            0 -> errorIcon.setImageResource(R.drawable.err_unknown)
+            1 -> errorIcon.setImageResource(R.drawable.err_check_internet)
+        }
+
         setScreen(0, 0, 1)
     }
 }

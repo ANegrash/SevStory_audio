@@ -58,7 +58,7 @@ class TourListFragment : Fragment() {
                 override fun onFailure(call: Call, e: IOException) {
                     if (context?.let { isOnline(it) } == false) {
                         errorImage.setImageResource(R.drawable.err_check_internet)
-                        errorText.text = "Проверьте интернет-соединение"
+                        errorText.text = resources.getString(R.string.err_no_internet)
                     }
                     listScreen.visibility = View.GONE
                     loadingScreen.visibility = View.GONE
