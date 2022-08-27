@@ -19,6 +19,7 @@ import java.io.IOException
 
 const val TOKEN_KEY = "prefs.token"
 const val IS_TOKEN_KEY = "prefs.is_token"
+const val USER_PICTURE_KEY = "prefs.user_picture"
 const val EMAIL_KEY = "prefs.email"
 const val PASS_KEY = "prefs.pass"
 const val FIRSTRUN_KEY = "prefs.firstrun"
@@ -80,6 +81,7 @@ class MainActivity : AppCompatActivity() {
                             if (token.isNotBlank()) {
                                 setToken(token)
                                 setTokenExist()
+                                setPicture("default")
                             }
                         }
                     }
@@ -137,4 +139,6 @@ class MainActivity : AppCompatActivity() {
     private fun getToken() = sharedPrefs.getString(TOKEN_KEY, "")
 
     private fun setToken(token: String) = sharedPrefs.edit().putString(TOKEN_KEY, token).apply()
+
+    private fun setPicture(picture: String) = sharedPrefs.edit().putString(USER_PICTURE_KEY, picture).apply()
 }
