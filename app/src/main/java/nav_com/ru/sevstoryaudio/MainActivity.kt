@@ -34,20 +34,6 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.hide()
         window.statusBarColor = Color.parseColor("#ffffff")
 
-        val jsonString = getSavedRouts()
-        if (!jsonString.isNullOrEmpty()) {
-            val oldSavedRoute = Gson().fromJson(jsonString, SavedRoutesModel::class.java)
-            if (oldSavedRoute.current == 0) {
-                val intent = Intent(this@MainActivity, StartTripActivity::class.java)
-                startActivity(intent)
-                finish()
-            } else if (oldSavedRoute.current > 0) {
-                val intent = Intent(this@MainActivity, SightActivity::class.java)
-                startActivity(intent)
-                finish()
-            }
-        }
-
         val intent = intent
         val backPage = intent.getStringExtra("return")
 
@@ -125,8 +111,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
-    private fun getSavedRouts() = sharedPrefs.getString(KEY_ROUTS, "")
 
     private fun isFirstrun() = sharedPrefs.getBoolean(FIRSTRUN_KEY, false)
 

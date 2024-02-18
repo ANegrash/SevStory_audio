@@ -3,6 +3,8 @@
     <string name="current_app_version">1.0.0</string>
 
     <string name="title_tour">Туры</string>
+    <string name="title_search">Поиск</string>
+    <string name="title_master">Мастерская</string>
     <string name="title_profile">Профиль</string>
     <string name="title_favorite">Избранное</string>
     <string name="title_avatar_changing">Изменение аватара</string>

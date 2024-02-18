@@ -190,6 +190,7 @@ class PreviewTripActivity : AppCompatActivity() {
                             tripViewed.text = tripPreview.viewed.toString()
                             tripDescription.text = tripPreview.description
                             tripStart.setOnClickListener {
+                                saveRouts()
                                 val intentOpen = Intent(this@PreviewTripActivity, StartTripActivity::class.java)
                                 intentOpen.putExtra("tripId", tripId)
                                 startActivity(intentOpen)
@@ -280,4 +281,6 @@ class PreviewTripActivity : AppCompatActivity() {
 
         setScreen(0, 0, 1)
     }
+
+    private fun saveRouts() = sharedPrefs.edit().putString(KEY_ROUTS, "").apply()
 }

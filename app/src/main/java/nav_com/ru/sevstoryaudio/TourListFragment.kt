@@ -12,6 +12,7 @@ import android.widget.AdapterView
 import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.google.gson.Gson
@@ -19,6 +20,8 @@ import nav_com.ru.sevstoryaudio.adapters.AllTripsAdapter
 import nav_com.ru.sevstoryaudio.connection.Get
 import nav_com.ru.sevstoryaudio.models.AllTripsModel
 import nav_com.ru.sevstoryaudio.models.ResponseAllTripsModel
+import nav_com.ru.sevstoryaudio.models.RouteModel
+import nav_com.ru.sevstoryaudio.models.SavedRoutesModel
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response
@@ -43,10 +46,44 @@ class TourListFragment : Fragment() {
         val errorImage = view1.findViewById<ImageView>(R.id.errorImage_tour_list)
         val errorText = view1.findViewById<TextView>(R.id.errorText_tour_list)
         val listView = view1.findViewById<ListView>(R.id.list_view)
+        val cardCurrentTrip = view1.findViewById<CardView>(R.id.card_continue_tour)
+        val currentSight = view1.findViewById<TextView>(R.id.card_sight)
 
         listScreen.visibility = View.GONE
         loadingScreen.visibility = View.VISIBLE
         errorScreen.visibility = View.GONE
+
+        val jsonString = getSavedRouts()
+        if (!jsonString.isNullOrEmpty()) {
+            cardCurrentTrip.visibility = View.VISIBLE
+            val oldSavedRoute = Gson().fromJson(jsonString, SavedRoutesModel::class.java)
+
+            if (oldSavedRoute.current == 0) {
+                val route : List<RouteModel> = oldSavedRoute.route
+                currentSight.text = route[oldSavedRoute.current].sightName
+
+                cardCurrentTrip.setOnClickListener {
+                    val intent = Intent(context, PreviewTripActivity::class.java)
+                    startActivity(intent)
+                    activity?.finish()
+                }
+
+            } else if (oldSavedRoute.current > 0) {
+                val route : List<RouteModel> = oldSavedRoute.route
+                val currentIndex : Int = oldSavedRoute.current - 1
+                currentSight.text = route[currentIndex].sightName
+
+                cardCurrentTrip.setOnClickListener {
+                    val intent = Intent(context, SightActivity::class.java)
+                    startActivity(intent)
+                    activity?.finish()
+                }
+
+            }
+
+        } else {
+            cardCurrentTrip.visibility = View.GONE
+        }
 
         val url = "https://sevstory.nav-com.ru/app/api?q=getAllTrips&token=" + getToken()
 
@@ -117,5 +154,6 @@ class TourListFragment : Fragment() {
             networkInfo?.isConnected ?: false
         } else false
     }
+    private fun getSavedRouts() = sharedPrefs?.getString(KEY_ROUTS, "")
 
 }
