@@ -80,14 +80,15 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_clock" />
+                    app:srcCompat="@drawable/ic_clock"
+                    app:tint="@color/gray_light" />
 
                 <TextView
                     android:id="@+id/time_trip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
-                    android:textColor="@color/gray"
+                    android:textColor="@color/gray_light"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/imageView2"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -100,14 +101,15 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/time_trip"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_location" />
+                    app:srcCompat="@drawable/ic_location"
+                    app:tint="@color/gray_light" />
 
                 <TextView
                     android:id="@+id/trip_points"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
-                    android:textColor="@color/gray"
+                    android:textColor="@color/gray_light"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/imageView3"
                     app:layout_constraintTop_toTopOf="parent" />

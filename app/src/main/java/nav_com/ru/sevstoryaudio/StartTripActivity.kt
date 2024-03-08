@@ -84,7 +84,7 @@ class StartTripActivity : AppCompatActivity() {
 
                 val userToken = getToken()
 
-                val url = "https://sevstory.nav-com.ru/app/api?q=getTripRoute&tripId=$tripId&token=$userToken"
+                val url = "trips/$tripId/route?token=$userToken"
 
                 val getResponse = Get()
 

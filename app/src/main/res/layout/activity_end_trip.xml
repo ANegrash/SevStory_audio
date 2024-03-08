@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_color"
     tools:context=".EndTripActivity">
 
     <TextView
@@ -13,7 +14,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:text="@string/end_trip_header"
-        android:textColor="@color/dark_gray"
+        android:textColor="@color/text_heading"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textView5"
@@ -55,17 +56,20 @@
 
     <Button
         android:id="@+id/missOrScore"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="32dp"
-        android:backgroundTint="@color/blue"
+        android:backgroundTint="@color/links"
         android:text="@string/btn_miss_rate"
-        android:textColor="@color/dark_white"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/background_color"
         android:textStyle="bold"
         app:cornerRadius="10dp"
+        app:icon="@drawable/ic_arrow_next"
+        app:iconTint="@color/background_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

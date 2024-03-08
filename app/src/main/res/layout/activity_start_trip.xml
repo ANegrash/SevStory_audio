@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_color"
     tools:context=".StartTripActivity">
 
     <Button
@@ -12,16 +13,17 @@
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_marginStart="4dp"
+        android:background="@color/transparent"
         android:paddingStart="8dp"
         android:paddingEnd="12dp"
         android:shadowColor="@android:color/transparent"
         android:text="@string/btn_back"
-        android:textAllCaps="true"
-        android:textColor="@color/dark_gray"
+        android:textAllCaps="false"
+        android:textColor="@color/links"
         app:cornerRadius="16dp"
         app:icon="@drawable/ic_arrow_back"
         app:iconPadding="2dp"
-        app:iconTint="@color/dark_gray"
+        app:iconTint="@color/links"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

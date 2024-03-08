@@ -34,16 +34,16 @@
     <string name="end_trip_header">Экскурсия завершена!</string>
     <string name="end_trip_rate_please">Оцените её, пожалуйста</string>
 
-    <string name="btn_back">назад</string>
+    <string name="btn_back">Назад</string>
     <string name="btn_save">Сохранить</string>
-    <string name="btn_start_trip">Начать!</string>
+    <string name="btn_start_trip">Начать</string>
     <string name="btn_to_first_sight">Я рядом с первой точкой</string>
     <string name="btn_to_first_sight_map">Маршрут к первой точке</string>
     <string name="btn_to_next_sight">О следующей точке</string>
     <string name="btn_to_next_sight_map">Путь к следующей точке</string>
     <string name="btn_end_trip">Завершить экскурсию</string>
     <string name="btn_miss_rate">Пропустить</string>
-    <string name="btn_score">Отправить оценку</string>
+    <string name="btn_score">Оценить</string>
 
     <string name="declensions_hour_1">час</string>
     <string name="declensions_hour_2">часа</string>
@@ -56,4 +56,6 @@
     <string name="declensions_point_1">точка</string>
     <string name="declensions_point_2">точки</string>
     <string name="declensions_point_3">точек</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

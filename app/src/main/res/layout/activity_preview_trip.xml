@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_color"
     tools:context=".PreviewTripActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,16 +21,17 @@
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginStart="4dp"
+            android:background="@color/transparent"
             android:paddingStart="8dp"
             android:paddingEnd="12dp"
             android:shadowColor="@android:color/transparent"
             android:text="@string/btn_back"
-            android:textAllCaps="true"
-            android:textColor="@color/dark_gray"
+            android:textAllCaps="false"
+            android:textColor="@color/links"
             app:cornerRadius="16dp"
             app:icon="@drawable/ic_arrow_back"
             app:iconPadding="2dp"
-            app:iconTint="@color/dark_gray"
+            app:iconTint="@color/links"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -87,6 +89,52 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:srcCompat="@drawable/ic_launcher_background" />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:background="@drawable/rounded_back"
+                            android:backgroundTint="@color/background_color"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <ImageView
+                                    android:id="@+id/imageView12"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="8dp"
+                                    android:layout_marginEnd="4dp"
+                                    android:src="@drawable/ic_baseline_star_24"
+                                    app:layout_constraintBottom_toBottomOf="@+id/textView18"
+                                    app:layout_constraintEnd_toStartOf="@+id/textView18"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="@+id/textView18"
+                                    app:tint="@color/text_heading" />
+
+                                <TextView
+                                    android:id="@+id/textView18"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:layout_marginEnd="8dp"
+                                    android:layout_marginBottom="8dp"
+                                    android:text="3,5"
+                                    android:textColor="@color/text_heading"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <TextView
@@ -121,8 +169,8 @@
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
                                 android:layout_marginStart="16dp"
-                                android:layout_marginTop="8dp"
-                                android:layout_marginBottom="8dp"
+                                android:layout_marginTop="16dp"
+                                android:layout_marginBottom="16dp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
@@ -162,8 +210,8 @@
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
                                 android:layout_marginStart="16dp"
-                                android:layout_marginTop="8dp"
-                                android:layout_marginBottom="8dp"
+                                android:layout_marginTop="16dp"
+                                android:layout_marginBottom="16dp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
@@ -204,8 +252,8 @@
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
                                 android:layout_marginStart="16dp"
-                                android:layout_marginTop="8dp"
-                                android:layout_marginBottom="8dp"
+                                android:layout_marginTop="16dp"
+                                android:layout_marginBottom="16dp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
@@ -294,9 +342,9 @@
                     android:layout_marginTop="4dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="4dp"
-                    android:backgroundTint="@color/blue"
+                    android:backgroundTint="@color/links"
                     android:text="@string/btn_start_trip"
-                    android:textColor="@color/white"
+                    android:textColor="@color/background_color"
                     android:textStyle="bold"
                     app:cornerRadius="20dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -310,7 +358,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/loadingScreen_preview_trip"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            tools:visibility="gone">
 
             <ProgressBar
                 android:id="@+id/progressBar2"
@@ -327,7 +376,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/errorScreen_preview_trip"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            tools:visibility="gone">
 
             <ImageView
                 android:id="@+id/errorImage_preview_trip"

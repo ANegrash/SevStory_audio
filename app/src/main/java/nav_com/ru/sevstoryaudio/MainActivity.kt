@@ -1,7 +1,6 @@
 package nav_com.ru.sevstoryaudio
 
 import android.content.Context
-import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -11,7 +10,6 @@ import com.google.android.material.navigation.NavigationBarView
 import com.google.gson.Gson
 import nav_com.ru.sevstoryaudio.connection.Get
 import nav_com.ru.sevstoryaudio.models.ResponseGetTokenModel
-import nav_com.ru.sevstoryaudio.models.SavedRoutesModel
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response
@@ -24,6 +22,8 @@ const val EMAIL_KEY = "prefs.email"
 const val PASS_KEY = "prefs.pass"
 const val FIRSTRUN_KEY = "prefs.firstrun"
 
+const val BASE_URL = "https://nav-com.ru/myguide/app/"
+
 class MainActivity : AppCompatActivity() {
 
     private val sharedPrefs by lazy {  getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE) }
@@ -32,7 +32,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
-        window.statusBarColor = Color.parseColor("#ffffff")
 
         val intent = intent
         val backPage = intent.getStringExtra("return")
@@ -43,7 +42,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         if (!isTokenExist()) {
-            val url = "https://sevstory.nav-com.ru/app/api?q=addNewSimpleUser"
+            val url = "user/create"
 
             val getResponse = Get()
 
@@ -77,18 +76,31 @@ class MainActivity : AppCompatActivity() {
         val bnView = findViewById<NavigationBarView>(R.id.bottom_navigation)
         val tourListFragment: Fragment = TourListFragment()
         val profileFragment: Fragment = ProfileFragment()
+        val masterFragment: Fragment = MasterFragment()
         val fragmentManager: FragmentManager = supportFragmentManager
         var active: Fragment = tourListFragment
 
         if (backPage == "profile") {
             bnView.selectedItemId = R.id.page_2
+            fragmentManager.beginTransaction().add(R.id.main_container, masterFragment, "4")
+                .hide(masterFragment).commit()
             fragmentManager.beginTransaction().add(R.id.main_container, tourListFragment, "2")
                 .hide(tourListFragment).commit()
             fragmentManager.beginTransaction().add(R.id.main_container, profileFragment, "1")
                 .commit()
             active = profileFragment
+        } else if (backPage == "master"){
+            bnView.selectedItemId = R.id.page_4
+            fragmentManager.beginTransaction().add(R.id.main_container, masterFragment, "4")
+                .commit()
+            fragmentManager.beginTransaction().add(R.id.main_container, profileFragment, "2")
+                .hide(profileFragment).commit()
+            fragmentManager.beginTransaction().add(R.id.main_container, tourListFragment, "1")
+                .hide(tourListFragment).commit()
         } else {
             bnView.selectedItemId = R.id.page_1
+            fragmentManager.beginTransaction().add(R.id.main_container, masterFragment, "4")
+                .hide(masterFragment).commit()
             fragmentManager.beginTransaction().add(R.id.main_container, profileFragment, "2")
                 .hide(profileFragment).commit()
             fragmentManager.beginTransaction().add(R.id.main_container, tourListFragment, "1")
@@ -105,6 +117,11 @@ class MainActivity : AppCompatActivity() {
                 R.id.page_2 -> {
                     fragmentManager.beginTransaction().hide(active).show(profileFragment).commit()
                     active = profileFragment
+                    true
+                }
+                R.id.page_4 -> {
+                    fragmentManager.beginTransaction().hide(active).show(masterFragment).commit()
+                    active = masterFragment
                     true
                 }
                 else -> false

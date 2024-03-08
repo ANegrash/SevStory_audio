@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import com.squareup.picasso.Picasso
+import nav_com.ru.sevstoryaudio.BASE_URL
 import nav_com.ru.sevstoryaudio.R
 import nav_com.ru.sevstoryaudio.models.FavModel
 
@@ -33,7 +34,7 @@ class FavTripsAdapter (
         val image = view.findViewById<ImageView>(R.id.iconTrip_fav)
 
         image.clipToOutline = true
-        val url = "https://sevstory.nav-com.ru/app/img/tour_icons/" + tripObj.tripIcon
+        val url = "${BASE_URL}img/tour_icons/" + tripObj.tripIcon
 
         Picasso.get()
             .load(url)

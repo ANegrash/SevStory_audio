@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -49,7 +50,7 @@ class TourListFragment : Fragment() {
         val cardCurrentTrip = view1.findViewById<CardView>(R.id.card_continue_tour)
         val currentSight = view1.findViewById<TextView>(R.id.card_sight)
 
-        listScreen.visibility = View.GONE
+        listScreen.visibility = View.VISIBLE
         loadingScreen.visibility = View.VISIBLE
         errorScreen.visibility = View.GONE
 
@@ -85,30 +86,36 @@ class TourListFragment : Fragment() {
             cardCurrentTrip.visibility = View.GONE
         }
 
-        val url = "https://sevstory.nav-com.ru/app/api?q=getAllTrips&token=" + getToken()
+        val url = "trips/all?token=" + getToken()
 
         val getResponse = Get()
-
+        Log.e("FATALITY", url)
         getResponse.run(
             url,
             object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
+                    Log.e("FATALITY", "Oh, fuck, error")
                     if (context?.let { isOnline(it) } == false) {
                         errorImage.setImageResource(R.drawable.err_check_internet)
                         errorText.text = resources.getString(R.string.err_no_internet)
                     }
-                    listScreen.visibility = View.GONE
-                    loadingScreen.visibility = View.GONE
-                    errorScreen.visibility = View.VISIBLE
+                    activity?.runOnUiThread {
+                        listScreen.visibility = View.GONE
+                        loadingScreen.visibility = View.GONE
+                        errorScreen.visibility = View.VISIBLE
+                    }
                 }
 
                 @Throws(IOException::class)
                 override fun onResponse(call: Call, response: Response) {
+                    Log.e("FATALITY", "RESPONSE!!!!")
                     val stringResponse = response.body.string()
                     val gson = Gson()
 
                     val responseAllTripsModel: ResponseAllTripsModel =
                         gson.fromJson(stringResponse, ResponseAllTripsModel::class.java)
+
+                    Log.e("FATALITY", stringResponse)
 
                     if (responseAllTripsModel.code == 200) {
                         val tripsList: List<AllTripsModel> =

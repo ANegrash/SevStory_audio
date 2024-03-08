@@ -19,6 +19,7 @@ class EndTripActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_end_trip)
+        saveRouts()
 
         val rating = findViewById<RatingBar>(R.id.ratingBar_endTrip)
         val buttonOk = findViewById<Button>(R.id.missOrScore)
@@ -33,7 +34,7 @@ class EndTripActivity : AppCompatActivity() {
             if (endRating > 0) {
                 val token = getToken()
                 val tripId = Gson().fromJson(getSavedRouts(), SavedRoutesModel::class.java).tripId
-                val url = "https://sevstory.nav-com.ru/app/api?q=setScore&tripId=$tripId&token=$token&score=$endRating"
+                val url = "trips/$tripId/score/$endRating?token=$token"
 
                 val getResponse = Get()
 
@@ -42,7 +43,6 @@ class EndTripActivity : AppCompatActivity() {
                     object : Callback {
                         override fun onFailure(call: Call, e: IOException) {
                             runOnUiThread {
-                                saveRouts()
                                 val mainActivity = Intent(this@EndTripActivity, MainActivity::class.java)
                                 startActivity(mainActivity)
                                 finish()
@@ -52,7 +52,6 @@ class EndTripActivity : AppCompatActivity() {
                         @Throws(IOException::class)
                         override fun onResponse(call: Call, response: Response) {
                             runOnUiThread {
-                                saveRouts()
                                 val mainActivity = Intent(this@EndTripActivity, MainActivity::class.java)
                                 startActivity(mainActivity)
                                 finish()
@@ -60,7 +59,6 @@ class EndTripActivity : AppCompatActivity() {
                         }
                     })
             } else {
-                saveRouts()
                 val mainActivity = Intent(this, MainActivity::class.java)
                 startActivity(mainActivity)
                 finish()

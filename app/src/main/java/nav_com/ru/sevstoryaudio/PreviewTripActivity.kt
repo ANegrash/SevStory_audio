@@ -46,7 +46,7 @@ class PreviewTripActivity : AppCompatActivity() {
         favorite.setOnClickListener {
             if (!isFavorite) {
                 val token = getToken()
-                val url = "https://sevstory.nav-com.ru/app/api?q=setFavorite&tripId=$tripId&token=$token"
+                val url = "user/favorites/set/$tripId?token=$token"
                 val getResponse = Get()
 
                 getResponse.run(
@@ -86,7 +86,7 @@ class PreviewTripActivity : AppCompatActivity() {
                     })
             } else {
                 val token = getToken()
-                val url = "https://sevstory.nav-com.ru/app/api?q=setNotFavorite&tripId=$tripId&token=$token"
+                val url = "user/favorites/reset/$tripId?token=$token"
                 val getResponse = Get()
 
                 getResponse.run(
@@ -127,7 +127,7 @@ class PreviewTripActivity : AppCompatActivity() {
             }
         }
 
-        val url = "https://sevstory.nav-com.ru/app/api?q=getTripPreview&tripId=$tripId&token=" + getToken()
+        val url = "trips/$tripId/preview?token=" + getToken()
         val getResponse = Get()
 
         getResponse.run(
@@ -166,7 +166,7 @@ class PreviewTripActivity : AppCompatActivity() {
                             val tripScore = findViewById<TextView>(R.id.rating_preview)
                             val tripViewed = findViewById<TextView>(R.id.countViewed)
 
-                            val urlImage = "https://sevstory.nav-com.ru/app/img/tour_preview/" + tripPreview.image
+                            val urlImage = "${BASE_URL}img/tour_preview/" + tripPreview.image
 
                             Picasso.get()
                                 .load(urlImage)

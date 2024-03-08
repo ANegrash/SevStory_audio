@@ -36,7 +36,7 @@ class FavoriteList : AppCompatActivity() {
     }
 
     private fun loadFavList () {
-        val url = "https://sevstory.nav-com.ru/app/api?q=getFavoriteList&token=" + getToken()
+        val url = "user/favorites/all?token=" + getToken()
         val getResponse = Get()
 
         getResponse.run(

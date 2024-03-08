@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.res.ColorStateList
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -73,7 +74,7 @@ class ChangeUserImageActivity : AppCompatActivity() {
         savePicture.setOnClickListener {
 
             val token = getToken()
-            val url = "https://sevstory.nav-com.ru/app/api?q=setUserPicture&pic=$pictureToSend&token=$token"
+            val url = "user/profile/picture/$pictureToSend?token=$token"
             val getResponse = Get()
 
             getResponse.run(
@@ -129,12 +130,12 @@ class ChangeUserImageActivity : AppCompatActivity() {
 
         clearAllLayouts()
         when (pic) {
-            "default" -> d.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.blue))
-            "amphora" -> a.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.blue))
-            "camera" -> c.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.blue))
-            "hotel" -> h.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.blue))
-            "plane" -> p.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.blue))
-            "world_map" -> m.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.blue))
+            "default" -> d.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.links))
+            "amphora" -> a.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.links))
+            "camera" -> c.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.links))
+            "hotel" -> h.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.links))
+            "plane" -> p.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.links))
+            "world_map" -> m.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.links))
         }
     }
 

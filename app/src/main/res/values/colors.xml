@@ -13,4 +13,12 @@
     <color name="dark_white">#dadae6</color>
     <color name="gold">#FFDF00</color>
     <color name="red">#FF2800</color>
+
+    <color name="background_color">#f6f8f7</color>
+    <color name="links">#0b94e4</color>
+    <color name="text_heading">#252525</color>
+    <color name="buttons_background">#e7e8ea</color>
+    <color name="gray_light">#a6a2a1</color>
+    <color name="transparent">#00000000</color>
+    <color name="gray_half_transparent">#A6E7E8</color>
 </resources>

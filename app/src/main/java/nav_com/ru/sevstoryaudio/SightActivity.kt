@@ -72,7 +72,7 @@ class SightActivity : AppCompatActivity() {
                     }
                 }
 
-                val url = "https://sevstory.nav-com.ru/app/api?q=getSightInfo&sightId=" + route[currentIndex].sightId
+                val url = "trips/" + route[currentIndex].sightId + "/info"
 
                 val getResponse = Get()
 
@@ -96,7 +96,7 @@ class SightActivity : AppCompatActivity() {
                             if (responseSightInfo.code == 200) {
                                 val sightInfo : SightInfo = responseSightInfo.responseBody
                                 runOnUiThread {
-                                    val imgUrl = "https://sevstory.nav-com.ru/app/img/sight_image/" + sightInfo.image
+                                    val imgUrl = "${BASE_URL}img/sight_image/" + sightInfo.image
                                     Picasso.get()
                                         .load(imgUrl)
                                         .placeholder(R.drawable.ic_launcher_background)
