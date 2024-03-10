@@ -24,45 +24,23 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
                     android:text="@string/title_tour"
-                    android:textColor="@color/text_heading"
-                    android:textSize="24sp"
-                    android:textStyle="bold"
+                    style="@style/h1"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                <Button
+                    android:id="@+id/button"
+                    style="@style/btn_on_action_bar_with_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Севастополь"
+                    app:icon="@drawable/ic_location"
+                    app:iconTint="@color/links"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                        <ImageView
-                            android:id="@+id/imageView6"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginEnd="4dp"
-                            app:layout_constraintBottom_toBottomOf="@+id/textView16"
-                            app:layout_constraintEnd_toStartOf="@+id/textView16"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="@+id/textView16"
-                            app:srcCompat="@drawable/ic_location"
-                            app:tint="@color/links" />
-
-                        <TextView
-                            android:id="@+id/textView16"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="16dp"
-                            android:text="Севастополь"
-                            android:textColor="@color/links"
-                            android:textSize="16sp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -73,6 +51,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="2dp"
             android:layout_marginEnd="16dp"
+            app:cardBackgroundColor="@color/back_chip_on_image"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/header_tours">
@@ -96,10 +75,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="16dp"
                                     android:layout_marginTop="8dp"
-                                    android:text="Продолжить экскурсию"
-                                    android:textColor="@color/dark_gray"
-                                    android:textSize="16sp"
-                                    android:textStyle="bold"
+                                    android:text="@string/continue_tour"
+                                    style="@style/h2"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -110,7 +87,7 @@
                                     android:layout_marginStart="16dp"
                                     android:layout_marginTop="8dp"
                                     android:layout_marginBottom="8dp"
-                                    android:text="Площадь Нахимова"
+                                    style="@style/simple_text"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toBottomOf="@+id/textView17" />
@@ -136,7 +113,8 @@
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toTopOf="parent"
-                                    app:srcCompat="@drawable/ic_arrow_next" />
+                                    android:src="@drawable/ic_arrow_next"
+                                    android:tint="@color/links"/>
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

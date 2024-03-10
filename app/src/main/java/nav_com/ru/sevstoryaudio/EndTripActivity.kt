@@ -19,6 +19,7 @@ class EndTripActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_end_trip)
+        val tripId = Gson().fromJson(getSavedRouts(), SavedRoutesModel::class.java).tripId
         saveRouts()
 
         val rating = findViewById<RatingBar>(R.id.ratingBar_endTrip)
@@ -33,7 +34,6 @@ class EndTripActivity : AppCompatActivity() {
 
             if (endRating > 0) {
                 val token = getToken()
-                val tripId = Gson().fromJson(getSavedRouts(), SavedRoutesModel::class.java).tripId
                 val url = "trips/$tripId/score/$endRating?token=$token"
 
                 val getResponse = Get()

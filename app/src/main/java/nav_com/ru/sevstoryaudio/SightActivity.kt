@@ -9,6 +9,8 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import nav_com.ru.sevstoryaudio.connection.Get
@@ -29,13 +31,24 @@ class SightActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sight)
 
+        val back = findViewById<Button>(R.id.backToAllTours)
         val toNextMap = findViewById<Button>(R.id.toNextMap)
         val toNextSight = findViewById<Button>(R.id.toNextSight)
         val sightName = findViewById<TextView>(R.id.sightName)
         val sightDescription = findViewById<TextView>(R.id.descriptionText)
         val sightImage = findViewById<ImageView>(R.id.sightImage)
+        val finishTrip = findViewById<Button>(R.id.finish_tour_in_sight)
+        finishTrip.visibility = View.GONE
+        toNextMap.visibility = View.GONE
+        toNextSight.visibility = View.GONE
 
         sightDescription.text = "Получение данных"
+
+        back.setOnClickListener {
+            val intentOpen = Intent(this@SightActivity, MainActivity::class.java)
+            startActivity(intentOpen)
+            finish()
+        }
 
         val jsonString = getSavedRouts()
         if (!jsonString.isNullOrEmpty()) {
@@ -46,16 +59,20 @@ class SightActivity : AppCompatActivity() {
                 sightName.text = route[currentIndex].sightName
 
                 if (route.lastIndex == currentIndex) {
-                    toNextMap.text = resources.getString(R.string.btn_end_trip)
+                    toNextMap.visibility = View.GONE
                     toNextSight.visibility = View.GONE
+                    finishTrip.visibility = View.VISIBLE
 
-                    toNextMap.setOnClickListener {
+                    finishTrip.setOnClickListener {
                         val endTrip = Intent(this@SightActivity, EndTripActivity::class.java)
                         startActivity(endTrip)
                         finish()
                     }
                 } else {
-                    oldSavedRoute.current = oldSavedRoute.current + 1
+                    oldSavedRoute.current += 1
+                    toNextMap.visibility = View.VISIBLE
+                    toNextSight.visibility = View.VISIBLE
+                    finishTrip.visibility = View.GONE
 
                     toNextMap.setOnClickListener {
                         val mapIntent = Intent(Intent.ACTION_VIEW)
@@ -72,7 +89,7 @@ class SightActivity : AppCompatActivity() {
                     }
                 }
 
-                val url = "trips/" + route[currentIndex].sightId + "/info"
+                val url = "sights/" + route[currentIndex].sightId + "/info"
 
                 val getResponse = Get()
 

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="white">#FFFFFFFF</color>
-    <color name="gray">#4d4d4d</color>
+    <color name="white">#000000</color>
+    <color name="gray">#f6f8f7</color>
     <color name="dark_gray">#1a1a1a</color>
-    <color name="dark_white">#dadae6</color>
+    <color name="dark_white">#252525</color>
     <color name="gold">#FFDF00</color>
 
-    <color name="background_color">#f6f8f7</color>
+    <color name="background_color">#4d4d4d</color>
     <color name="links">#0b94e4</color>
-    <color name="text_heading">#252525</color>
+    <color name="text_heading">#dadae6</color>
     <color name="buttons_background">#e7e8ea</color>
     <color name="gray_light">#a6a2a1</color>
     <color name="transparent">#00000000</color>

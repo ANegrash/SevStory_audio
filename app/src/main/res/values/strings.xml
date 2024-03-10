@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SevStory audio</string>
+    <string name="app_name">Мой гид</string>
     <string name="current_app_version">1.0.0</string>
 
     <string name="title_tour">Туры</string>
@@ -8,6 +8,7 @@
     <string name="title_profile">Профиль</string>
     <string name="title_favorite">Избранное</string>
     <string name="title_avatar_changing">Изменение аватара</string>
+    <string name="continue_tour">Продолжить экскурсию</string>
 
     <string name="err_no_internet">Проверьте интернет-соединение</string>
     <string name="err_unknown">Произошла неизвестная ошибка, попробуйте позже</string>
@@ -25,10 +26,10 @@
     <string name="preview_trip_what_see">Что посетим?</string>
     <string name="preview_trip_description">Описание</string>
     <string name="preview_trip_h">ч</string>
-    <string name="preview_trip_min">мин</string>
+    <string name="preview_trip_min">м</string>
 
-    <string name="start_trip_last_step">Последний шаг перед началом…</string>
-    <string name="start_trip_waiting_heading">Загружаем маршрут нашего путешествия, нужно немного подождать</string>
+    <string name="start_trip_last_step">Загружаем маршрут нашего путешествия</string>
+    <string name="start_trip_waiting_heading">Нужно немного подождать</string>
     <string name="start_trip_first_point_heading">Первой точкой нашей экскурсии является</string>
 
     <string name="end_trip_header">Экскурсия завершена!</string>
@@ -38,9 +39,10 @@
     <string name="btn_save">Сохранить</string>
     <string name="btn_start_trip">Начать</string>
     <string name="btn_to_first_sight">Я рядом с первой точкой</string>
-    <string name="btn_to_first_sight_map">Маршрут к первой точке</string>
-    <string name="btn_to_next_sight">О следующей точке</string>
-    <string name="btn_to_next_sight_map">Путь к следующей точке</string>
+    <string name="btn_to_first_sight_map">Путь к началу</string>
+    <string name="btn_listen">Слушать</string>
+    <string name="btn_to_next_sight">Рассказ\nдалее</string>
+    <string name="btn_to_next_sight_map">Маршрут\nдалее</string>
     <string name="btn_end_trip">Завершить экскурсию</string>
     <string name="btn_miss_rate">Пропустить</string>
     <string name="btn_score">Оценить</string>
@@ -56,6 +58,7 @@
     <string name="declensions_point_1">точка</string>
     <string name="declensions_point_2">точки</string>
     <string name="declensions_point_3">точек</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="navigation_heading">Памятка по навигации</string>
+    <string name="navigation_btn_route">Эта кнопка откроет карту со следующей точкой маршрута</string>
+    <string name="navigation_btn_next">Эта кнопка откроет описание следующей точки маршрута</string>
 </resources>

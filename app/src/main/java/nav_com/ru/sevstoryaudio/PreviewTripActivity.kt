@@ -164,7 +164,7 @@ class PreviewTripActivity : AppCompatActivity() {
 
                             val tripLength = findViewById<TextView>(R.id.time_preview)
                             val tripScore = findViewById<TextView>(R.id.rating_preview)
-                            val tripViewed = findViewById<TextView>(R.id.countViewed)
+                            val tripViewed = findViewById<TextView>(R.id.count_viewed)
 
                             val urlImage = "${BASE_URL}img/tour_preview/" + tripPreview.image
 
@@ -177,10 +177,11 @@ class PreviewTripActivity : AppCompatActivity() {
                                 chip.text = item
                                 chip.isClickable = false
                                 chip.isCheckable = false
-                                chip.setChipBackgroundColorResource(R.color.white)
-                                chip.setChipStrokeColorResource(R.color.gray)
+                                chip.setChipBackgroundColorResource(R.color.background_color)
+                                chip.setChipStrokeColorResource(R.color.gray_light)
                                 chip.chipStrokeWidth = 2.5F
                                 chip.setTextColor(resources.getColor(R.color.gray))
+                                chip.typeface = resources.getFont(R.font.roboto)
                                 chipGroup.addView(chip as View)
                             }
 

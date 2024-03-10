@@ -31,9 +31,12 @@ class StartTripActivity : AppCompatActivity() {
         val done = findViewById<ConstraintLayout>(R.id.doneStarting)
         val infoText = findViewById<TextView>(R.id.infoTextStart)
         val monumentText = findViewById<TextView>(R.id.monumentInfoText)
-        val toSight = findViewById<Button>(R.id.goToFirstSight)
-        val toMap = findViewById<Button>(R.id.goToMapFirstly)
+        val toSight = findViewById<Button>(R.id.toFirstSight)
+        val toMap = findViewById<Button>(R.id.toFirstMap)
         val resetRoute = findViewById<Button>(R.id.resetRoute)
+
+        toMap.isEnabled = false
+        toSight.isEnabled = false
 
         val jsonString = getSavedRouts()
         if (!jsonString.isNullOrEmpty()) {
@@ -42,6 +45,9 @@ class StartTripActivity : AppCompatActivity() {
             loading.visibility = View.GONE
             infoText.text = resources.getString(R.string.start_trip_first_point_heading)
             monumentText.text = oldSavedRoute.route[0].sightName
+
+            toMap.isEnabled = true
+            toSight.isEnabled = true
 
             toMap.setOnClickListener {
                 val mapIntent = Intent(Intent.ACTION_VIEW)
@@ -126,6 +132,9 @@ class StartTripActivity : AppCompatActivity() {
                                     infoText.text = resources.getString(R.string.start_trip_first_point_heading)
 
                                     monumentText.text = route[0].sightName
+
+                                    toMap.isEnabled = true
+                                    toSight.isEnabled = true
 
                                     toMap.setOnClickListener {
                                         val mapIntent = Intent(Intent.ACTION_VIEW)

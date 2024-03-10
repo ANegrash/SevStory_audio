@@ -64,7 +64,7 @@ class TourListFragment : Fragment() {
                 currentSight.text = route[oldSavedRoute.current].sightName
 
                 cardCurrentTrip.setOnClickListener {
-                    val intent = Intent(context, PreviewTripActivity::class.java)
+                    val intent = Intent(context, StartTripActivity::class.java)
                     startActivity(intent)
                     activity?.finish()
                 }

@@ -4,7 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_color"
     tools:context=".SightActivity">
+    <Button
+        android:id="@+id/backToAllTours"
+        style="@style/btn_on_action_bar_with_text"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginStart="4dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="12dp"
+        android:text="@string/btn_back"
+        app:icon="@drawable/ic_arrow_back"
+        app:iconPadding="2dp"
+        app:iconTint="@color/links"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -12,7 +27,7 @@
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/backToAllTours">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -37,24 +52,33 @@
 
             <TextView
                 android:id="@+id/sightName"
+                style="@style/h2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                android:textColor="@color/dark_gray"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:layout_marginEnd="8dp" />
+
+            <Button
+                android:id="@+id/sight_listen"
+                style="@style/btn_cta_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/btn_listen"
+                app:cornerRadius="20dp"
+                app:icon="@drawable/ic_headset"
+                app:iconTint="@color/background_color" />
 
             <TextView
                 android:id="@+id/descriptionText"
+                style="@style/simple_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                android:textColor="@color/gray" />
+                android:layout_marginBottom="8dp" />
         </LinearLayout>
     </ScrollView>
 
@@ -62,40 +86,63 @@
         android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/background_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
+            android:id="@+id/finish_tour_in_sight"
+            style="@style/btn_cta_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:text="@string/btn_end_trip"
+            app:cornerRadius="20dp"
+            app:icon="@drawable/ic_finish"
+            app:iconTint="@color/background_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
             android:id="@+id/toNextMap"
+            style="@style/btn_cta_1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:backgroundTint="@color/blue"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="2dp"
+            android:layout_marginBottom="4dp"
             android:text="@string/btn_to_next_sight_map"
-            android:textColor="@color/white"
-            app:cornerRadius="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:cornerRadius="20dp"
+            app:icon="@drawable/ic_map"
+            app:iconTint="@color/background_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/toNextSight"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.45" />
 
         <Button
             android:id="@+id/toNextSight"
+            style="@style/btn_cta_2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="4dp"
             android:layout_marginBottom="4dp"
-            android:backgroundTint="@color/dark_white"
             android:text="@string/btn_to_next_sight"
-            android:textColor="@color/blue"
-            app:cornerRadius="10dp"
+            app:cornerRadius="20dp"
+            app:icon="@drawable/ic_play"
+            app:iconTint="@color/links"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toNextMap" />
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/toNextMap"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.45" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
