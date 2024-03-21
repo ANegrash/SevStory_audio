@@ -156,11 +156,17 @@ class PreviewTripActivity : AppCompatActivity() {
                             val chipGroup = findViewById<ChipGroup>(R.id.chip_group)
                             val tripDescription = findViewById<TextView>(R.id.description_trip_preview)
                             val tripStart = findViewById<Button>(R.id.startButton)
+                            val tripIsAudio = findViewById<ConstraintLayout>(R.id.isAudio)
 
                             if (tripPreview.isFavorite) {
                                 favorite.setImageResource(R.drawable.ic_favorite_fill)
                                 isFavorite = true
                             }
+
+                            if (tripPreview.isAudio)
+                                tripIsAudio.visibility = View.VISIBLE
+                            else
+                                tripIsAudio.visibility = View.GONE
 
                             val tripLength = findViewById<TextView>(R.id.time_preview)
                             val tripScore = findViewById<TextView>(R.id.rating_preview)

@@ -8,5 +8,6 @@ data class TripPreviewModel(
     val sightsArray: Array<String>,
     val score: Float,
     val viewed: Int,
-    val isFavorite: Boolean
+    val isFavorite: Boolean,
+    val isAudio: Boolean
 )
