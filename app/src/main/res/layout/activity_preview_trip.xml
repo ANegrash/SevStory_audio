@@ -258,10 +258,8 @@
                         android:layout_height="match_parent"
                         android:paddingLeft="8dp"
                         android:paddingRight="8dp"
-                        app:chipSpacingVertical="0dp"
-                        app:singleLine="false">
-
-                    </com.google.android.material.chip.ChipGroup>
+                        app:chipSpacingVertical="-8dp"
+                        app:singleLine="false"/>
 
                     <TextView
                         android:id="@+id/textView7"
@@ -290,7 +288,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout"
                 android:layout_width="match_parent"
-                android:layout_height="58dp"
+                android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
@@ -299,7 +297,6 @@
                     android:id="@+id/startButton"
                     style="@style/btn_cta_1"
                     android:layout_width="wrap_content"
-                    android:layout_height="0dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginEnd="16dp"
