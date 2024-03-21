@@ -20,6 +20,8 @@ const val IS_TOKEN_KEY = "prefs.is_token"
 const val USER_PICTURE_KEY = "prefs.user_picture"
 const val EMAIL_KEY = "prefs.email"
 const val PASS_KEY = "prefs.pass"
+const val CITY_ID_KEY = "prefs.city_id"
+const val CITY_NAME_KEY = "prefs.city_name"
 const val FIRSTRUN_KEY = "prefs.firstrun"
 
 const val BASE_URL = "https://nav-com.ru/myguide/app/"
@@ -39,6 +41,12 @@ class MainActivity : AppCompatActivity() {
         if (isFirstrun()) {
             //TODO: first introducing activity
             //setFirstrun()
+        }
+
+        if (getCityId() == 0) {
+            //TODO: change to city selection
+            setCityId(1)
+            setCityName("Севастополь")
         }
 
         if (!isTokenExist()) {
@@ -142,4 +150,12 @@ class MainActivity : AppCompatActivity() {
     private fun setToken(token: String) = sharedPrefs.edit().putString(TOKEN_KEY, token).apply()
 
     private fun setPicture(picture: String) = sharedPrefs.edit().putString(USER_PICTURE_KEY, picture).apply()
+
+    private fun getCityId() = sharedPrefs.getInt(CITY_ID_KEY, 0)
+
+    private fun setCityId(id: Int) = sharedPrefs.edit().putInt(CITY_ID_KEY, id).apply()
+
+    private fun getCityName() = sharedPrefs.getString(CITY_NAME_KEY, "")
+
+    private fun setCityName(name: String) = sharedPrefs.edit().putString(CITY_NAME_KEY, name).apply()
 }

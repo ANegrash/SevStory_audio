@@ -55,7 +55,7 @@
                 android:gravity="center_vertical"
                 android:maxLines="3"
                 android:textAlignment="textStart"
-                style="@style/simple_text"
+                style="@style/h2"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"

@@ -16,6 +16,9 @@
         android:theme="@style/Theme.SevStoryAudio"
         tools:targetApi="31">
         <activity
+            android:name=".SelectCity"
+            android:exported="false" />
+        <activity
             android:name=".ChangeUserImageActivity"
             android:exported="false" />
         <activity

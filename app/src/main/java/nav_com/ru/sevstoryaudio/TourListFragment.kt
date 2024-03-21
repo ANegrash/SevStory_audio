@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
@@ -49,10 +50,21 @@ class TourListFragment : Fragment() {
         val listView = view1.findViewById<ListView>(R.id.list_view)
         val cardCurrentTrip = view1.findViewById<CardView>(R.id.card_continue_tour)
         val currentSight = view1.findViewById<TextView>(R.id.card_sight)
+        val selectedCity = view1.findViewById<Button>(R.id.button_select_city)
 
         listScreen.visibility = View.VISIBLE
         loadingScreen.visibility = View.VISIBLE
         errorScreen.visibility = View.GONE
+
+        if (!getCityName().isNullOrEmpty()){
+            selectedCity.text = getCityName()
+        }
+
+        selectedCity.setOnClickListener {
+            val intent = Intent(context, SelectCity::class.java)
+            startActivity(intent)
+            activity?.finish()
+        }
 
         val jsonString = getSavedRouts()
         if (!jsonString.isNullOrEmpty()) {
@@ -86,7 +98,9 @@ class TourListFragment : Fragment() {
             cardCurrentTrip.visibility = View.GONE
         }
 
-        val url = "trips/all?token=" + getToken()
+        val cityId = getCityId()
+
+        val url = "trips/$cityId/all?token=" + getToken()
 
         val getResponse = Get()
         Log.e("FATALITY", url)
@@ -162,5 +176,9 @@ class TourListFragment : Fragment() {
         } else false
     }
     private fun getSavedRouts() = sharedPrefs?.getString(KEY_ROUTS, "")
+
+    private fun getCityId() = sharedPrefs?.getInt(CITY_ID_KEY, 0)
+
+    private fun getCityName() = sharedPrefs?.getString(CITY_NAME_KEY, "")
 
 }
