@@ -2,15 +2,17 @@ package nav_com.ru.sevstoryaudio
 
 import android.content.Context
 import android.content.Intent
+import android.media.MediaPlayer
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.constraintlayout.widget.ConstraintSet
+import androidx.core.content.PackageManagerCompat.LOG_TAG
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import nav_com.ru.sevstoryaudio.connection.Get
@@ -22,6 +24,7 @@ import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response
 import java.io.IOException
+
 
 class SightActivity : AppCompatActivity() {
 
@@ -38,9 +41,16 @@ class SightActivity : AppCompatActivity() {
         val sightDescription = findViewById<TextView>(R.id.descriptionText)
         val sightImage = findViewById<ImageView>(R.id.sightImage)
         val finishTrip = findViewById<Button>(R.id.finish_tour_in_sight)
+        val sightListenBtn = findViewById<Button>(R.id.sight_play)
+        val sightListenBtnFrame = findViewById<ConstraintLayout>(R.id.player_btn_frame)
+        val sightPauseBtn = findViewById<Button>(R.id.sight_pause)
+        val loadAudio = findViewById<TextView>(R.id.sight_loading_audio_tv)
+
         finishTrip.visibility = View.GONE
         toNextMap.visibility = View.GONE
         toNextSight.visibility = View.GONE
+        sightListenBtnFrame.visibility = View.GONE
+        loadAudio.visibility = View.GONE
 
         sightDescription.text = "Получение данных"
 
@@ -113,6 +123,27 @@ class SightActivity : AppCompatActivity() {
                             if (responseSightInfo.code == 200) {
                                 val sightInfo : SightInfo = responseSightInfo.responseBody
                                 runOnUiThread {
+
+                                    if (sightInfo.hasAudio) {
+                                        sightListenBtnFrame.visibility = View.VISIBLE
+                                        val audioURL = "${BASE_URL}audio/" + sightInfo.audioName
+                                        val mediaPlayer = MediaPlayer()
+                                        mediaPlayer.setDataSource(audioURL)
+
+                                        sightListenBtn.setOnClickListener {
+                                            loadAudio.visibility = View.VISIBLE
+                                            mediaPlayer.prepare()
+                                            loadAudio.visibility = View.GONE
+                                            mediaPlayer.start()
+                                        }
+
+                                        sightPauseBtn.setOnClickListener {
+                                            if (mediaPlayer.isPlaying)
+                                                mediaPlayer.pause()
+                                        }
+                                    } else
+                                        sightListenBtnFrame.visibility = View.GONE
+
                                     val imgUrl = "${BASE_URL}img/sight_image/" + sightInfo.image
                                     Picasso.get()
                                         .load(imgUrl)
@@ -132,6 +163,10 @@ class SightActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    fun onPrepared(mp: MediaPlayer) {
+        mp.start()
     }
 
     private fun getGeoString(lon: Double, lat: Double, sight: String) = "geo:$lon,$lat?q=$lon,$lat($sight)"

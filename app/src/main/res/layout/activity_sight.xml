@@ -59,16 +59,63 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp" />
 
-            <Button
-                android:id="@+id/sight_listen"
-                style="@style/btn_cta_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/btn_listen"
-                app:cornerRadius="20dp"
-                app:icon="@drawable/ic_headset"
-                app:iconTint="@color/background_color" />
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/player_btn_frame"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp">
+
+                    <Button
+                        android:id="@+id/sight_play"
+                        style="@style/btn_cta_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="54dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/half_round_left"
+                        android:text="@string/btn_listen"
+                        app:backgroundTint="@color/links"
+                        app:icon="@drawable/ic_play"
+                        app:layout_constraintBottom_toTopOf="@+id/sight_loading_audio_tv"
+                        app:layout_constraintEnd_toStartOf="@+id/sight_pause"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintHorizontal_chainStyle="packed"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <Button
+                        android:id="@+id/sight_pause"
+                        style="@style/btn_cta_2"
+                        android:layout_width="54dp"
+                        android:layout_height="54dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/half_round_right"
+                        android:text="@string/btn_no_text"
+                        app:backgroundTint="@color/btn_secondary_background"
+                        app:icon="@drawable/ic_pause"
+                        app:iconTint="@color/links"
+                        app:layout_constraintBottom_toTopOf="@+id/sight_loading_audio_tv"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/sight_play"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/sight_loading_audio_tv"
+                        style="@style/simple_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:text="@string/sight_loading_audio"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </FrameLayout>
 
             <TextView
                 android:id="@+id/descriptionText"
@@ -131,7 +178,8 @@
             android:layout_marginBottom="4dp"
             android:text="@string/btn_to_next_sight"
             app:cornerRadius="20dp"
-            app:icon="@drawable/ic_play"
+            app:icon="@drawable/ic_arrow_next"
+            app:iconGravity="end"
             app:iconTint="@color/links"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

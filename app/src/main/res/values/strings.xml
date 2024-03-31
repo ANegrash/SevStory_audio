@@ -33,6 +33,8 @@
     <string name="start_trip_waiting_heading">Нужно немного подождать</string>
     <string name="start_trip_first_point_heading">Первой точкой нашей экскурсии является</string>
 
+    <string name="sight_loading_audio">Загрузка аудиоконтента...</string>
+
     <string name="end_trip_header">Экскурсия завершена!</string>
     <string name="end_trip_rate_please">Оцените её, пожалуйста</string>
 
@@ -47,6 +49,7 @@
     <string name="btn_end_trip">Завершить экскурсию</string>
     <string name="btn_miss_rate">Пропустить</string>
     <string name="btn_score">Оценить</string>
+    <string name="btn_no_text"> </string>
 
     <string name="declensions_hour_1">час</string>
     <string name="declensions_hour_2">часа</string>
