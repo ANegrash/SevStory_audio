@@ -1,59 +1,132 @@
 package nav_com.ru.sevstoryaudio
 
+import android.content.Context
+import android.content.Intent
+import android.content.res.ColorStateList
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageButton
+import android.widget.ImageView
+import androidx.core.content.ContextCompat
+import androidx.core.widget.ImageViewCompat
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [MasterFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class MasterFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private val sharedPrefs by lazy { activity?.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE) }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_master, container, false)
-    }
+    ): View {
+        val view1: View = inflater.inflate(R.layout.fragment_master, container, false)
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment MasterFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            MasterFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+        val selectedCity = view1.findViewById<Button>(R.id.button_select_city_master)
+        val addStartBtn = view1.findViewById<Button>(R.id.add_start_point_btn)
+        val startPointChip = view1.findViewById<Chip>(R.id.chip_start_sight)
+        val addMiddleBtn = view1.findViewById<Button>(R.id.add_middle_points_btn)
+        val chipGroup = view1.findViewById<ChipGroup>(R.id.middle_points_chip_group)
+        val createTripBtn = view1.findViewById<Button>(R.id.create_master)
+
+        startPointChip.visibility = View.GONE
+        addStartBtn.visibility = View.VISIBLE
+        createTripBtn.visibility = View.GONE
+
+        if (!getCityName().isNullOrEmpty()){
+            selectedCity.text = getCityName()
+        }
+
+        Log.e("FATALISM", ""+getSavedIdList())
+
+        selectedCity.setOnClickListener {
+            val intent = Intent(context, SelectCity::class.java)
+            intent.putExtra("return", "master")
+            startActivity(intent)
+            activity?.finish()
+        }
+
+        val namesListString = getSavedNamesList()
+
+        var isFirstForCreate = false
+        var isMiddleForCreate = false
+
+        if (namesListString?.length != 0) {
+            val namesList = namesListString?.split(",")?.toTypedArray()
+
+            var skipFirstInMiddle = false
+
+            if (isStartPointSelected() == true) {
+                startPointChip.text = namesList?.get(0)
+                startPointChip.visibility = View.VISIBLE
+                addStartBtn.visibility = View.GONE
+                skipFirstInMiddle = true
+                isFirstForCreate = true
+            }
+
+            if (namesList != null) {
+                for (item in namesList) {
+                    if (skipFirstInMiddle) {
+                        skipFirstInMiddle = false
+                        continue
+                    }
+                    val chip = Chip(context)
+                    chip.text = item
+                    chip.isClickable = false
+                    chip.isCheckable = false
+                    chip.setChipBackgroundColorResource(R.color.background_color)
+                    chip.setChipStrokeColorResource(R.color.gray_light)
+                    chip.chipStrokeWidth = 2.5F
+                    chip.setTextColor(resources.getColor(R.color.gray))
+                    chip.typeface = resources.getFont(R.font.roboto)
+                    chipGroup.addView(chip as View)
+                    isMiddleForCreate = true
                 }
             }
+        }
+
+        if (isFirstForCreate && isMiddleForCreate)
+            createTripBtn.visibility = View.VISIBLE
+
+        addStartBtn.setOnClickListener {
+            val intent = Intent(context, MasterSelectSightActivity::class.java)
+            intent.putExtra("return", "master")
+            intent.putExtra("selection", "start")
+            startActivity(intent)
+            activity?.finish()
+        }
+
+        addMiddleBtn.setOnClickListener {
+            val intent = Intent(context, MasterSelectSightActivity::class.java)
+            intent.putExtra("return", "master")
+            intent.putExtra("selection", "middle")
+            startActivity(intent)
+            activity?.finish()
+        }
+
+        return view1
     }
+
+    private fun getCityId() = sharedPrefs?.getInt(CITY_ID_KEY, 0)
+
+    private fun getCityName() = sharedPrefs?.getString(CITY_NAME_KEY, "")
+
+    private fun getSavedIdList() = sharedPrefs?.getString(MASTER_SAVED_ID_LIST, "")
+
+    private fun setSavedIdList(list: String) = sharedPrefs?.edit()?.putString(MASTER_SAVED_ID_LIST, list)?.apply()
+
+    private fun getSavedNamesList() = sharedPrefs?.getString(MASTER_SAVED_NAME_LIST, "")
+
+    private fun setSavedNamesList(list: String) = sharedPrefs?.edit()?.putString(MASTER_SAVED_NAME_LIST, list)?.apply()
+
+    private fun isStartPointSelected() = sharedPrefs?.getBoolean(MASTER_SAVED_IS_FIRST, false)
+
+    private fun setStartPointSelected(isSelected: Boolean) = sharedPrefs?.edit()?.putBoolean(
+        MASTER_SAVED_IS_FIRST, isSelected)?.apply()
 }

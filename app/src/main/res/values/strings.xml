@@ -10,6 +10,7 @@
     <string name="title_avatar_changing">Изменение аватара</string>
     <string name="continue_tour">Продолжить экскурсию</string>
     <string name="title_select_city">Выбор города</string>
+    <string name="title_select_sight">Выбор точки</string>
 
     <string name="err_no_internet">Проверьте интернет-соединение</string>
     <string name="err_unknown">Произошла неизвестная ошибка, попробуйте позже</string>

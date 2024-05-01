@@ -33,8 +33,12 @@ class SelectCity : AppCompatActivity() {
         val back = findViewById<Button>(R.id.backToAllTours_selectCity)
         val list = findViewById<ListView>(R.id.list_select_city)
 
+        val intent = intent
+        val backPage = intent.getStringExtra("return")
+
         back.setOnClickListener {
             val intentOpen = Intent(this@SelectCity, MainActivity::class.java)
+            intentOpen.putExtra("return", backPage)
             startActivity(intentOpen)
             finish()
         }
@@ -77,6 +81,7 @@ class SelectCity : AppCompatActivity() {
                                 setCityName(allCitiesList[position].cityName)
 
                                 val intentOpen = Intent(this@SelectCity, MainActivity::class.java)
+                                intentOpen.putExtra("return", backPage)
                                 startActivity(intentOpen)
                                 finish()
                             }
@@ -94,6 +99,7 @@ class SelectCity : AppCompatActivity() {
 
     override fun onBackPressed() {
         val intentOpen = Intent(this@SelectCity, MainActivity::class.java)
+        intentOpen.putExtra("return", intent.getStringExtra("return"))
         startActivity(intentOpen)
         finish()
     }

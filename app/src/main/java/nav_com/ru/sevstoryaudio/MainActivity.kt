@@ -24,6 +24,10 @@ const val CITY_ID_KEY = "prefs.city_id"
 const val CITY_NAME_KEY = "prefs.city_name"
 const val FIRSTRUN_KEY = "prefs.firstrun"
 
+const val MASTER_SAVED_ID_LIST = "prefs.master_id_list"
+const val MASTER_SAVED_NAME_LIST = "prefs.master_name_list"
+const val MASTER_SAVED_IS_FIRST = "prefs.master_is_first"
+
 const val BASE_URL = "https://nav-com.ru/myguide/app/"
 
 class MainActivity : AppCompatActivity() {

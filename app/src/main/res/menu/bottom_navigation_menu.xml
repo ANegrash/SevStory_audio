@@ -6,11 +6,6 @@
         android:icon="@drawable/ic_directions"
         android:title="@string/title_tour"/>
     <item
-        android:id="@+id/page_3"
-        android:enabled="false"
-        android:icon="@drawable/ic_search"
-        android:title="@string/title_search"/>
-    <item
         android:id="@+id/page_4"
         android:enabled="true"
         android:icon="@drawable/ic_master"

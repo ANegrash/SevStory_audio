@@ -5,7 +5,6 @@ import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -62,6 +61,7 @@ class TourListFragment : Fragment() {
 
         selectedCity.setOnClickListener {
             val intent = Intent(context, SelectCity::class.java)
+            intent.putExtra("return", "tour_list")
             startActivity(intent)
             activity?.finish()
         }
@@ -103,12 +103,11 @@ class TourListFragment : Fragment() {
         val url = "trips/$cityId/all?token=" + getToken()
 
         val getResponse = Get()
-        Log.e("FATALITY", url)
+
         getResponse.run(
             url,
             object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
-                    Log.e("FATALITY", "Oh, fuck, error")
                     if (context?.let { isOnline(it) } == false) {
                         errorImage.setImageResource(R.drawable.err_check_internet)
                         errorText.text = resources.getString(R.string.err_no_internet)
@@ -122,14 +121,12 @@ class TourListFragment : Fragment() {
 
                 @Throws(IOException::class)
                 override fun onResponse(call: Call, response: Response) {
-                    Log.e("FATALITY", "RESPONSE!!!!")
+
                     val stringResponse = response.body.string()
                     val gson = Gson()
 
                     val responseAllTripsModel: ResponseAllTripsModel =
                         gson.fromJson(stringResponse, ResponseAllTripsModel::class.java)
-
-                    Log.e("FATALITY", stringResponse)
 
                     if (responseAllTripsModel.code == 200) {
                         val tripsList: List<AllTripsModel> =
