@@ -48,7 +48,7 @@ class ProfileFragment : Fragment() {
             "camera" -> userPicture.setImageResource(R.drawable.user_camera)
             "hotel" -> userPicture.setImageResource(R.drawable.user_hotel)
             "plane" -> userPicture.setImageResource(R.drawable.user_plane)
-            "world_map" -> userPicture.setImageResource(R.drawable.user_world_map)
+            "worldmap" -> userPicture.setImageResource(R.drawable.user_world_map)
         }
         changePhoto.setOnClickListener {
             val intent = Intent(context, ChangeUserImageActivity::class.java)

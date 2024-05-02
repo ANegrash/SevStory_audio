@@ -72,10 +72,19 @@ class SightActivity : AppCompatActivity() {
                     toNextSight.visibility = View.GONE
                     finishTrip.visibility = View.VISIBLE
 
-                    finishTrip.setOnClickListener {
-                        val endTrip = Intent(this@SightActivity, EndTripActivity::class.java)
-                        startActivity(endTrip)
-                        finish()
+                    if (oldSavedRoute.tripId == "master") {
+                        finishTrip.setOnClickListener {
+                            val endTrip = Intent(this@SightActivity, MainActivity::class.java)
+                            saveRouts("")
+                            startActivity(endTrip)
+                            finish()
+                        }
+                    } else {
+                        finishTrip.setOnClickListener {
+                            val endTrip = Intent(this@SightActivity, EndTripActivity::class.java)
+                            startActivity(endTrip)
+                            finish()
+                        }
                     }
                 } else {
                     oldSavedRoute.current += 1

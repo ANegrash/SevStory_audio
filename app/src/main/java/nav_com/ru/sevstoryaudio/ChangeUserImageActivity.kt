@@ -67,7 +67,7 @@ class ChangeUserImageActivity : AppCompatActivity() {
         }
 
         mapBtn.setOnClickListener {
-            selectPic("world_map")
+            selectPic("worldmap")
         }
 
         savePicture.setOnClickListener {
@@ -134,7 +134,7 @@ class ChangeUserImageActivity : AppCompatActivity() {
             "camera" -> c.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.links))
             "hotel" -> h.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.links))
             "plane" -> p.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.links))
-            "world_map" -> m.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.links))
+            "worldmap" -> m.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.links))
         }
     }
 

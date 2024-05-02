@@ -16,6 +16,15 @@ import androidx.core.content.ContextCompat
 import androidx.core.widget.ImageViewCompat
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
+import com.google.gson.Gson
+import nav_com.ru.sevstoryaudio.connection.Get
+import nav_com.ru.sevstoryaudio.models.ResponseRouteModel
+import nav_com.ru.sevstoryaudio.models.RouteModel
+import nav_com.ru.sevstoryaudio.models.SavedRoutesModel
+import okhttp3.Call
+import okhttp3.Callback
+import okhttp3.Response
+import java.io.IOException
 
 class MasterFragment : Fragment() {
 
@@ -110,6 +119,56 @@ class MasterFragment : Fragment() {
             activity?.finish()
         }
 
+        createTripBtn.setOnClickListener {
+            val userToken = getToken()
+            val cityId = getCityId()
+            val savedIdList = getSavedIdList()
+
+            val url = "master/$cityId/add?token=$userToken&sightsId=$savedIdList"
+
+            val getResponse = Get()
+
+            getResponse.run(
+                url,
+                object : Callback {
+                    override fun onFailure(call: Call, e: IOException) {
+                        activity?.runOnUiThread {
+
+                        }
+                    }
+
+                    @Throws(IOException::class)
+                    override fun onResponse(call: Call, response: Response) {
+                        val stringResponse = response.body.string()
+                        val gson = Gson()
+
+                        val responseRoute: ResponseRouteModel =
+                            gson.fromJson(stringResponse, ResponseRouteModel::class.java)
+
+                        if (responseRoute.code == 200) {
+                            val route: List<RouteModel> = responseRoute.responseBody
+
+                            val savedRoute = SavedRoutesModel(0, "master", route)
+
+                            saveRouts(gson.toJson(savedRoute))
+
+                            activity?.runOnUiThread {
+                                setSavedIdList("")
+                                setSavedNamesList("")
+                                setStartPointSelected(false)
+
+                                val intent = Intent(context, StartTripActivity::class.java)
+                                intent.putExtra("tripId", "master")
+                                startActivity(intent)
+                                activity!!.finish()
+                            }
+
+                        }
+                    }
+                }
+            )
+        }
+
         return view1
     }
 
@@ -129,4 +188,8 @@ class MasterFragment : Fragment() {
 
     private fun setStartPointSelected(isSelected: Boolean) = sharedPrefs?.edit()?.putBoolean(
         MASTER_SAVED_IS_FIRST, isSelected)?.apply()
+
+    private fun getToken() = sharedPrefs?.getString(TOKEN_KEY, "")
+
+    private fun saveRouts (routes: String) = sharedPrefs?.edit()?.putString(KEY_ROUTS, routes)?.apply()
 }

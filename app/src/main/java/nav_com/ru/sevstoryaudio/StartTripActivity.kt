@@ -64,12 +64,21 @@ class StartTripActivity : AppCompatActivity() {
                 finish()
             }
 
-            resetRoute.setOnClickListener {
-                saveRouts("")
-                val back = Intent(this@StartTripActivity, PreviewTripActivity::class.java)
-                back.putExtra("tripId", oldSavedRoute.tripId)
-                startActivity(back)
-                finish()
+            if (oldSavedRoute.tripId == "master") {
+                resetRoute.setOnClickListener {
+                    saveRouts("")
+                    val back = Intent(this@StartTripActivity, MainActivity::class.java)
+                    startActivity(back)
+                    finish()
+                }
+            } else {
+                resetRoute.setOnClickListener {
+                    saveRouts("")
+                    val back = Intent(this@StartTripActivity, PreviewTripActivity::class.java)
+                    back.putExtra("tripId", oldSavedRoute.tripId)
+                    startActivity(back)
+                    finish()
+                }
             }
         } else {
 
@@ -94,12 +103,21 @@ class StartTripActivity : AppCompatActivity() {
 
                 val getResponse = Get()
 
-                resetRoute.setOnClickListener {
-                    saveRouts("")
-                    val back = Intent(this@StartTripActivity, PreviewTripActivity::class.java)
-                    back.putExtra("tripId", tripId)
-                    startActivity(back)
-                    finish()
+                if (tripId == "master") {
+                    resetRoute.setOnClickListener {
+                        saveRouts("")
+                        val back = Intent(this@StartTripActivity, MainActivity::class.java)
+                        startActivity(back)
+                        finish()
+                    }
+                } else {
+                    resetRoute.setOnClickListener {
+                        saveRouts("")
+                        val back = Intent(this@StartTripActivity, PreviewTripActivity::class.java)
+                        back.putExtra("tripId", tripId)
+                        startActivity(back)
+                        finish()
+                    }
                 }
 
                 getResponse.run(
